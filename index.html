@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Base styles & Custom theme colors */
@@ -31,31 +32,17 @@
         .bg-gradient-blue { background: linear-gradient(to right, #2c7cbd, #225f92); }
         .bg-theme-yellow { background: linear-gradient(to right, #f8cc18, #f8d844); }
         .border-theme-yellow { border-color: #f8cc18; }
+        
+        .font-playfair { font-family: 'Playfair Display', serif; }
 
         /* Main container styling and entrance animation */
-        #chat-app-container {
-            width: 100vw;
-            height: 100vh;
-            max-width: none;
-            max-height: none;
-            border-radius: 0;
-            box-shadow: none;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            background-color: #ffffff;
+        .chat-container-animate {
             animation: containerFadeIn 0.8s ease-out forwards;
         }
 
         @keyframes containerFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Header Styling */
@@ -63,6 +50,9 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
             padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         /* Chat bubble styles */
@@ -118,14 +108,8 @@
 
         /* Keyframe animation for messages */
         @keyframes fadeInSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Options slider styles */
@@ -136,6 +120,9 @@
             background-color: #f9f9f9;
             border-top: 1px solid #e9e9e9;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #options-wrapper {
@@ -169,45 +156,40 @@
             background: linear-gradient(to right, #f8cc18, #f8d844);
             color: #333333;
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 0 12px rgba(0,0,0,0.15);
             border-color: #f8cc18;
         }
         .option-button:active {
             transform: translateY(0) scale(0.98);
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        .option-button:first-child {
-            margin-left: 0;
+        .option-button:first-child { margin-left: 0; }
+        .option-button:last-child { margin-right: 0; }
+
+        .website-button {
+            background: linear-gradient(to right, #2c7cbd, #225f92);
+            color: white;
+            font-weight: 600;
+            border: 1px solid #225f92;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            margin: 0 6px;
         }
-        .option-button:last-child {
-            margin-right: 0;
+        .website-button:hover {
+            background: linear-gradient(to right, #225f92, #1d4d77);
+            color: white;
+            border-color: #1d4d77;
         }
 
         @keyframes optionFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Scrollbar styling for chat window */
-        #chat-window::-webkit-scrollbar {
-            width: 8px;
-        }
-        #chat-window::-webkit-scrollbar-track {
-            background: #f0f0f0;
-        }
-        #chat-window::-webkit-scrollbar-thumb {
-            background: #bdbdbd;
-            border-radius: 8px;
-        }
-        #chat-window::-webkit-scrollbar-thumb:hover {
-            background: #a0a0a0;
-        }
+        #chat-window::-webkit-scrollbar { width: 8px; }
+        #chat-window::-webkit-scrollbar-track { background: #f0f0f0; }
+        #chat-window::-webkit-scrollbar-thumb { background: #bdbdbd; border-radius: 8px; }
+        #chat-window::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
 
         /* Typing indicator */
         .typing-indicator {
@@ -288,14 +270,33 @@
             transform: translateY(0);
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-
-        /* Adjust header to accommodate the button */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        
+        /* New Stop/Pause Reading button styling */
+        #stop-reading-button {
+            background: linear-gradient(to right, #d32f2f, #b71c1c);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+            margin-left: 15px;
+            flex-shrink: 0;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            font-weight: 500;
+            display: none; /* Initially hidden */
+        }
+        
+        #stop-reading-button:hover {
+            background: linear-gradient(to right, #b71c1c, #9a0c0c);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+        }
+        #stop-reading-button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
+        /* Adjust header to accommodate the button */
         header > div:first-child {
             display: flex;
             align-items: center;
@@ -350,12 +351,8 @@
             transition: transform 0.2s ease;
         }
 
-        .logo-link:hover {
-            transform: scale(1.01);
-        }
-        .logo-link:active {
-            transform: scale(0.99);
-        }
+        .logo-link:hover { transform: scale(1.01); }
+        .logo-link:active { transform: scale(0.99); }
 
         .logo-link .w-14 {
             transition: background-color 0.2s ease, transform 0.2s ease;
@@ -364,55 +361,212 @@
             background-color: #f5f5f5;
             transform: rotate(3deg);
         }
+        
+        /* Tab styles now in the header */
+        .tab-button-header {
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #ffcccc;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+        .tab-button-header::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%) scaleX(0);
+            width: 80%;
+            height: 2px;
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+        .tab-button-header.active {
+            color: white;
+        }
+        .tab-button-header.active::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+        .tab-button-header:hover:not(.active) {
+            color: #ffeaea;
+        }
 
-        /* Media Queries for Responsiveness - mostly redundant now but keeping for consistency */
+        /* New FAQ container styles */
+        #faq-container {
+            display: none;
+            padding: 1.5rem;
+            overflow-y: auto;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .faq-section {
+            margin-bottom: 2.5rem;
+            background: linear-gradient(145deg, #f0f2f5, #ffffff);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #e51f17;
+            animation: slideInUp 0.6s ease-out forwards;
+            opacity: 0;
+            position: relative;
+        }
+        .faq-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .faq-section:nth-child(even) { border-left-color: #2c7cbd; }
+        .faq-section:nth-child(2) { animation-delay: 0.1s; }
+        .faq-section:nth-child(3) { animation-delay: 0.2s; }
+        .faq-section:nth-child(4) { animation-delay: 0.3s; }
+        .faq-section:nth-child(5) { animation-delay: 0.4s; }
+        .faq-section:nth-child(6) { animation-delay: 0.5s; }
+
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .faq-section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #c01a14;
+            margin-bottom: 0.75rem;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-right: 60px; /* Make space for the button */
+        }
+        .faq-section:nth-child(even) h2 {
+            color: #225f92;
+        }
+        .faq-content-container {
+            line-height: 1.7;
+            color: #4a4a4a;
+            font-weight: 400;
+        }
+
+        .faq-content-container p, .faq-content-container ul {
+            margin-bottom: 1rem;
+        }
+        .faq-content-container ul {
+            list-style-type: '👉';
+            padding-left: 20px;
+        }
+        .faq-content-container li {
+            margin-bottom: 0.5rem;
+            color: #555555;
+            padding-left: 5px;
+        }
+        .faq-content-container li strong {
+            color: #333333;
+        }
+        
+        /* New styling for the Read button in FAQs */
+        .faq-read-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(to right, #2c7cbd, #225f92);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .faq-read-btn:hover {
+            background: linear-gradient(to right, #225f92, #1d4d77);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+        .faq-read-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+        .faq-read-btn.stop {
+            background: linear-gradient(to right, #d32f2f, #b71c1c);
+        }
+        .faq-read-btn.stop:hover {
+            background: linear-gradient(to right, #b71c1c, #9a0c0c);
+        }
+
+        /* Media Queries for Responsiveness */
         @media (max-width: 600px) {
-            body {
-                padding: 0;
-            }
-
-            #chat-app-container {
+            body { padding: 0; }
+            .main-app-wrapper {
                 height: 100vh;
                 border-radius: 0;
                 max-width: 100%;
                 max-height: 100vh;
                 box-shadow: none;
             }
-
             header {
                 border-radius: 0;
+                flex-direction: column;
+                align-items: flex-start;
+                padding-bottom: 0;
             }
-
+            header > div:first-child {
+                flex-grow: 1;
+            }
+            .header-tabs {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                background-color: rgba(255,255,255,0.1);
+                margin-top: 10px;
+                padding: 5px 0;
+            }
+            .tab-button-header {
+                font-size: 0.8rem;
+                flex-grow: 1;
+                text-align: center;
+                padding: 10px 0;
+            }
             #options-container {
                 border-radius: 0;
                 padding: 10px 5px;
             }
-
-            .chat-bubble {
-                max-width: 90%;
-            }
-
+            .chat-bubble { max-width: 90%; }
             .option-button {
                 padding: 8px 12px;
                 font-size: 0.8rem;
                 margin: 0 4px;
             }
-
             .scroll-arrow {
                 width: 32px;
                 height: 32px;
                 font-size: 0.9em;
             }
-            
             #clear-chat-button {
                 padding: 6px 10px;
+                font-size: 0.8em;
+            }
+            #faq-container { padding: 1rem; }
+            .faq-section h2 { font-size: 1.5rem; padding-right: 40px; }
+            .faq-section { padding: 1.5rem; }
+            .faq-read-btn {
+                top: 1.5rem;
+                right: 1.5rem;
+                padding: 6px 12px;
                 font-size: 0.8em;
             }
         }
     </style>
 </head>
 <body class="bg-white flex items-center justify-center min-h-screen p-0 m-0">
-    <div class="w-full h-screen flex flex-col bg-white overflow-hidden chat-container-animate" id="chat-app-container">
+    <!-- Main wrapper for the entire application -->
+    <div class="w-full h-screen max-w-none max-h-none flex flex-col bg-white overflow-hidden main-app-wrapper rounded-xl shadow-lg">
+
+        <!-- Header containing logo and tabs -->
         <header class="bg-gradient-red text-white p-4 flex items-center shadow-md z-10">
             <div class="flex items-center">
                 <a href="https://dcmyesschool.com" target="_blank" class="logo-link" aria-label="Visit DCM YES School Website">
@@ -421,28 +575,41 @@
                     </div>
                     <div>
                         <h1 class="text-xl font-bold">DCM YES School</h1>
-                        <p class="text-sm opacity-90">How can I help you today?</p>
+                        <p id="greeting-text" class="text-sm opacity-90">How can I help you today?</p>
                     </div>
                 </a>
             </div>
-            <button id="clear-chat-button" class="ml-auto" aria-label="Clear Chat History">Clear Chat</button>
+            
+            <div class="header-tabs flex items-center">
+                <button id="tab-ai-chat" class="tab-button-header active">AI Chat</button>
+                <button id="tab-faqs" class="tab-button-header">FAQs</button>
+                <button id="clear-chat-button" class="ml-4" aria-label="Clear Chat History">Clear Chat</button>
+                <button id="stop-reading-button" aria-label="Stop Reading Aloud">Stop Reading</button>
+            </div>
         </header>
 
-        <main id="chat-window" class="flex-1 p-4 md:p-6 overflow-y-auto" role="log" aria-live="polite" aria-atomic="false">
-            <div id="date-display" class="text-center text-gray-500 text-sm mb-4"></div>
-            <div id="message-container" class="flex flex-col space-y-4">
-                </div>
-        </main>
+        <!-- AI Chat Container -->
+        <div id="ai-chat-container" class="w-full h-full flex flex-col bg-white overflow-hidden chat-container-animate">
+            <main id="chat-window" class="flex-1 p-4 md:p-6 overflow-y-auto" role="log" aria-live="polite" aria-atomic="false">
+                <div id="date-display" class="text-center text-gray-500 text-sm mb-4"></div>
+                <div id="message-container" class="flex flex-col space-y-4"></div>
+            </main>
 
-        <footer id="options-container" class="p-4 border-t border-gray-200 bg-gray-50 overflow-hidden flex items-center justify-content-center">
-            <button id="scroll-left-btn" class="scroll-arrow mr-2" aria-label="Scroll options left"><i class="fas fa-chevron-left"></i></button>
-            <div id="options-wrapper" class="flex-1 overflow-x-hidden" role="group" aria-label="Available questions">
-                </div>
-            <button id="scroll-right-btn" class="scroll-arrow ml-2" aria-label="Scroll options right"><i class="fas fa-chevron-right"></i></button>
-        </footer>
-		    <div style="text-align: center; margin-top: 20px; font-size: 0.8em; color: #777;">
-        Created by Riddhish, a 10-year-old student from Grade 6.
-    </div>
+            <footer id="options-container" class="p-4 border-t border-gray-200 bg-gray-50 overflow-hidden flex items-center justify-content-center">
+                <button id="scroll-left-btn" class="scroll-arrow mr-2" aria-label="Scroll options left"><i class="fas fa-chevron-left"></i></button>
+                <div id="options-wrapper" class="flex-1 overflow-x-hidden" role="group" aria-label="Available questions"></div>
+                <button id="scroll-right-btn" class="scroll-arrow ml-2" aria-label="Scroll options right"><i class="fas fa-chevron-right"></i></button>
+            </footer>
+        </div>
+
+        <!-- FAQs Container (initially hidden) -->
+        <div id="faq-container" class="w-full h-full overflow-y-auto">
+            <!-- FAQ content will be dynamically generated here -->
+        </div>
+        
+		<div style="text-align: center; padding-top: 10px; padding-bottom: 20px; font-size: 0.8em; color: #777;">
+            Created by Riddhish, a 10-year-old student from Grade 6.
+        </div>
     </div>
 
     <script>
@@ -483,239 +650,532 @@
                     },
                     'achievements': {
                         question: 'Our Achievements',
-                        answer: 'DCM YES School stands out with unique programs and innovative environments: <ul class="list-disc list-inside mt-2"><li><strong>Dual Diplomas:</strong> Partnership with Houghton Academy, New York, USA, offering an American High School diploma alongside CBSE studies.</li><li><strong>Earn While You Learn:</strong> Internship program fostering leadership and real-world work experience.</li><li><strong>Etiquette Villa:</strong> Dedicated program for personality development, public speaking, and interview skills.</li><li><strong>Advanced Labs:</strong> State-of-the-art AI Lab, Makerspace, IT & Research Center, and AR/VR Lab for cutting-edge learning.</li></ul>We consistently receive accolades for academic excellence, sports, and co-curricular activities, preparing students to excel.',
-                        followUpAnswer: 'Our notable achievements include the <strong>Dual Diploma program</strong> with a US academy, the <strong>Earn While You Learn</strong> internships, specialized <strong>Etiquette Villa</strong> for personality grooming, and advanced facilities like our <strong>AI, Makerspace, and AR/VR Labs</strong>. We strive for excellence in academics, sports, and co-curricular activities.'
-                    },
-                    'website': {
-                        question: 'Go to Website',
-                        answer: 'Opening DCM YES School website in a new tab...',
-                        url: 'https://dcmyesschool.com'
+                        answer: 'DCM YES School stands out with unique programs and innovative environments: <ul class="list-disc list-inside mt-2"><li><strong>Dual Diplomas:</strong> Partnership with Houghton Academy, New York, USA, offering an American High School diploma alongside CBSE studies.</li><li><strong>Earn While You Learn:</strong> Internship program fostering leadership and real-world work experience.</li><li><strong>Etiquette Villa:</strong> Dedicated program for personality development, grooming, and social skills.</li><li><strong>Entrepreneurial Platform:</strong> Cultivating future leaders and innovators.</li><li><strong>Global Collaboration:</strong> Our students have participated in international forums like the World Entrepreneurship Summit, USA.</li></ul>',
+                        followUpAnswer: 'Our key achievements include dual diplomas with Houghton Academy, an "Earn While You Learn" internship program, an Etiquette Villa for grooming, a platform for young entrepreneurs, and international collaborations like our participation in the World Entrepreneurship Summit.'
                     },
                     'safety_security': {
                         question: 'Safety & Security',
-                        answer: 'DCM YES School prioritizes a safe and secure environment with round-the-clock security and robust safety protocols. The campus is meticulously designed to ensure the well-being of all students.',
-                        followUpAnswer: 'Our commitment to safety includes 24/7 security and comprehensive protocols to maintain a secure campus for all students.'
+                        answer: 'Your child\'s safety is our highest priority. Our campus is equipped with a comprehensive, round-the-clock security system, including CCTV surveillance. We also have a dedicated team of security personnel to ensure a safe and secure environment for all students and staff.',
+                        followUpAnswer: 'We maintain a high level of safety with 24/7 security, CCTV surveillance, and dedicated staff to ensure a secure environment for everyone on campus.'
                     },
                     'health_wellness': {
                         question: 'Health & Wellness',
-                        answer: 'The school features a Health & Wellness Centre and provides Pastoral Care & Counseling Cell services to support the overall well-being and mental health of students.',
-                        followUpAnswer: 'We have a dedicated Health & Wellness Centre and a Pastoral Care & Counseling Cell to ensure the holistic well-being of our students.'
+                        answer: 'The physical and mental well-being of our students is paramount. We have a dedicated health clinic with a qualified nurse on campus to handle any medical emergencies. Regular health check-ups and wellness workshops are conducted to promote a healthy lifestyle.',
+                        followUpAnswer: 'We prioritize student health with an on-campus clinic and a nurse. We also conduct regular health check-ups and workshops to promote wellness.'
                     },
                     'yespreneurship': {
                         question: 'Yespreneurship Programs',
-                        answer: 'Our Yespreneurship program fosters entrepreneurial skills through Incubation Cells, Industry Interface, a Finishing School, Financial Literacy, Legal Literacy, Soft Skills development, and Student Leadership initiatives. We also offer International Exposure.',
-                        followUpAnswer: 'Yespreneurship at DCM YES includes Incubation Cells, industry partnerships, a Finishing School, and various literacy programs focused on financial, legal, and soft skills to develop future leaders with international exposure.'
+                        answer: 'Our "Yespreneurship" program is designed to instill a spirit of entrepreneurship in our students from a young age. This initiative provides a platform for students to develop innovative business ideas, learn about market dynamics, and receive mentorship from industry experts.',
+                        followUpAnswer: 'The "Yespreneurship" program is our initiative to foster entrepreneurship. Students get a platform to develop ideas, learn about business, and receive expert mentorship.'
                     },
                     'innovation': {
                         question: 'Innovation at YES',
-                        answer: 'Innovation is central to our learning, with facilities like Robotics Lab, AI Lab, Makerspace, IT & Research Center, VR Lab, Junior Student Research Fellowship, Design Thinking, Coding, Patent Support, and programs like Protons, Wheelocity, and Kiddovators.',
-                        followUpAnswer: 'Our innovation focus is supported by state-of-the-art labs for Robotics, AI, VR, and IT, alongside programs encouraging Design Thinking, Coding, and student research projects like Kiddovators.'
+                        answer: 'At DCM YES, innovation is at the heart of everything we do. Our curriculum integrates emerging technologies like AI, AR, VR, and ML to prepare students for the future. We encourage a culture of curiosity and creative problem-solving across all subjects.',
+                        followUpAnswer: 'We are committed to innovation, integrating technologies like AI, AR, VR, and ML into our curriculum. Our goal is to foster a culture of curiosity and creative problem-solving.'
                     },
                     'sports': {
                         question: 'Sports Facilities',
-                        answer: 'We offer world-class sports facilities including a Shooting Range, Ace Badminton Academy, Aqua Star Swimming Club, and various indoor (Chess, Table Tennis, Billiards) and outdoor (Golf, Archery, Mini Soccer, Cricket, Basketball) sports, along with Elementary Sports for younger students.',
-                        followUpAnswer: 'DCM YES provides extensive sports facilities: a Shooting Range, Badminton, Swimming, and a wide array of indoor and outdoor games like Golf, Cricket, and Basketball, supported by expert coaches.'
+                        answer: 'We believe a healthy body is as important as a healthy mind. Our school has spacious grounds for various sports like football, cricket, basketball, and athletics. We have a team of expert coaches to train students and help them excel in their chosen sport.',
+                        followUpAnswer: 'Our sports facilities include large grounds for football, cricket, basketball, and athletics. We have expert coaches to help students develop their skills.'
                     },
                     'global_programs': {
                         question: 'Global Programs & Exposure',
-                        answer: 'Our global initiatives include a Foreign Languages Centre, Student Exchange Programs, International Excursions, an American High School Diploma option, Overseas Education Plan, Study Abroad Clinic, and an IELTS Centre, preparing students for international opportunities.',
-                        followUpAnswer: 'For global exposure, we offer Foreign Languages, Student Exchange Programs, International Excursions, the American High School Diploma, and support for overseas education and IELTS preparation.'
+                        answer: 'DCM YES School is a globally-minded institution. We have collaborations with international schools and our students participate in global forums and exchange programs. This exposure helps our students develop a global perspective and become world citizens.',
+                        followUpAnswer: 'We offer global exposure through collaborations with international schools and participation in forums and exchange programs, helping students develop a global perspective.'
                     }
                 };
-
-                this.questionAskCount = {}; // Tracks how many times each question has been asked
-            }
-
-            /**
-             * Simulates an API call to get the initial welcome message and options.
-             * In a real scenario, this might hit a /start endpoint.
-             * @returns {Promise<Object>} A promise resolving with the start data.
-             */
-            async getStartData() {
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        resolve({
-                            message: this.qaDatabase['start'].answer,
-                            options: this.getAllPrimaryOptionKeys()
-                        });
-                    }, 500); // Simulate network latency
-                });
-            }
-
-            /**
-             * Simulates an API call to get a response for a specific question.
-             * In a real scenario, this might hit a /ask endpoint with the question key.
-             * @param {string} questionKey - The key of the question asked.
-             * @returns {Promise<Object>} A promise resolving with the answer and potential follow-up actions.
-             */
-            async getAnswer(questionKey) {
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        const data = this.qaDatabase[questionKey];
-                        if (data) {
-                            this.questionAskCount[questionKey] = (this.questionAskCount[questionKey] || 0) + 1;
-                            const answer = (this.questionAskCount[questionKey] > 1 && data.followUpAnswer) ?
-                                data.followUpAnswer : data.answer;
-                            
-                            resolve({
-                                question: data.question,
-                                answer: answer,
-                                url: data.url || null, // For 'website' option
-                                options: this.getAllPrimaryOptionKeys() // Always return primary options for now
-                            });
-                        } else {
-                            reject(new Error('Question not found'));
-                        }
-                    }, 1000); // Simulate processing time + network latency
-                });
-            }
-
-            /**
-             * Retrieves all primary option keys.
-             * @returns {string[]} An array of question keys.
-             */
-            getAllPrimaryOptionKeys() {
-                return [
-                    'admissions', 'curriculum', 'facilities', 'contact', 'about_us', 'achievements',
-                    'safety_security', 'health_wellness', 'yespreneurship', 'innovation', 'sports',
-                    'global_programs', 'website'
+                
+                // An array of key-value pairs for displaying the FAQs directly.
+                this.faqContent = [
+                    {
+                        key: 'about_us',
+                        title: 'The Legacy: A Story of Excellence',
+                        content: `For over 75 years, DCM YES School has been a beacon of learning in Ludhiana, shaping the futures of over 112,500 students since its founding in 1946 by Late Shri M R Dass. Our vision, "From Cradle to Corporate," is more than a motto—it's a commitment to nurturing young minds with a perfect blend of timeless values and cutting-edge educational practices. We prepare our students for a world of rapid change by focusing on innovation, entrepreneurship, and emerging technologies like AI, AR, VR, and ML.`
+                    },
+                    {
+                        key: 'admissions',
+                        title: 'Your Journey Starts Here: The Admissions Process',
+                        content: `Embark on a new chapter with us! Our admission process for the upcoming academic session typically commences in the crisp month of November. To ensure you have all the necessary information—from eligibility criteria and required documents to important deadlines—we invite you to explore the dedicated <a href="https://dcmyesschool.com/contact" class="text-theme-blue font-semibold" target="_blank">admissions section on our official website</a>. We look forward to welcoming you to the DCM YES family!`
+                    },
+                    {
+                        key: 'curriculum',
+                        title: 'A World of Knowledge: Our Innovative Curriculum',
+                        content: `At DCM YES, we believe in a curriculum that does more than just educate—it inspires. We follow the esteemed <strong>CBSE curriculum</strong>, but we don't stop there. We've enriched it with our own specialized programs tailored for every age group. These include our unique <strong>Mother's Lap, CCLICK, SLITEE, and CLASSE</strong> initiatives, all designed to foster holistic growth. Our students thrive in an environment rich with diverse co-curricular and extra-curricular activities, ensuring a well-rounded educational experience.`
+                    },
+                    {
+                        key: 'facilities',
+                        title: 'Modern Marvels: Facilities That Inspire',
+                        content: `Our campus is a hub of innovation and learning, equipped with a wide array of state-of-the-art facilities:
+                        <ul class="list-disc list-inside mt-2">
+                            <li><strong>Smart Classrooms:</strong> Digitally networked for interactive learning.</li>
+                            <li><strong>Ultra-Modern Labs:</strong> Specialized labs for Physics, Chemistry, Biology, Social Studies, Maths, AI/Robotics, and languages.</li>
+                            <li><strong>Hi-tech Library:</strong> A treasure trove of knowledge for curious minds.</li>
+                            <li><strong>Expansive Sports Grounds:</strong> Perfect for indoor and outdoor games with expert coaching.</li>
+                            <li><strong>Kids Amusement Park:</strong> A fun and vibrant space with rides and animated characters.</li>
+                            <li><strong>Etiquette Villa:</strong> A dedicated space for personality development and grooming.</li>
+                        </ul>`
+                    },
+                    {
+                        key: 'achievements',
+                        title: 'Pioneering Pathways: Our Unique Achievements',
+                        content: `We pride ourselves on programs that go beyond the ordinary:
+                        <ul class="list-disc list-inside mt-2">
+                            <li><strong>Dual Diplomas:</strong> A prestigious partnership with Houghton Academy, New York, USA, allowing students to earn both a CBSE and an American High School diploma.</li>
+                            <li><strong>Earn While You Learn:</strong> An innovative internship program to build real-world skills and leadership qualities.</li>
+                            <li><strong>Entrepreneurial Platform:</strong> A dynamic space to cultivate the next generation of innovators and business leaders.</li>
+                            <li><strong>Global Collaborations:</strong> Our students have made their mark on the international stage at events like the World Entrepreneurship Summit, USA.</li>
+                        </ul>`
+                    },
+                    {
+                        key: 'contact',
+                        title: 'Connect with Us',
+                        content: `We're always here to help. You can reach our team through: <br><br>
+                        <strong>Phone:</strong> <a href="tel:+911613510099" class="text-theme-blue font-semibold">+91-161-3510099</a><br>
+                        <strong>Mobile:</strong> <a href="tel:+918728893030" class="text-theme-blue font-semibold">+91-8728893030</a><br>
+                        <strong>General Email:</strong> <a href="mailto:contact@dcmyesschool.com" class="text-theme-blue font-semibold">contact@dcmyesschool.com</a><br>
+                        <strong>Admissions Email:</strong> <a href="mailto:admissions@dcmyesschool.com" class="text-theme-blue font-semibold">admissions@dcmyesschool.com</a><br><br>
+                        Our beautiful campus is located at: DCM Young Entrepreneurs School, Block-B, Rajguru Nagar, Ludhiana, Punjab - 141012 (India).`
+                    },
+                    {
+                        key: 'safety_security',
+                        title: 'A Safe Haven: Safety and Security',
+                        content: `Your child's safety is our utmost priority. Our campus is a fortress of security, featuring a comprehensive, round-the-clock CCTV surveillance system and a vigilant team of security personnel. We are committed to providing a secure and nurturing environment where students can learn, play, and grow without a worry.`
+                    },
+                    {
+                        key: 'health_wellness',
+                        title: 'Holistic Well-Being: Health and Wellness',
+                        content: `We believe that a healthy body and a healthy mind are the cornerstones of successful learning. Our school has a fully-equipped health clinic staffed by a qualified nurse, ready to handle any medical needs. We also promote a culture of wellness through regular health check-ups and engaging workshops that empower students to make healthy lifestyle choices.`
+                    },
+                    {
+                        key: 'yespreneurship',
+                        title: 'The Future is Now: Yespreneurship Programs',
+                        content: `Our innovative "Yespreneurship" program is designed to spark the entrepreneurial spirit in every student. This unique platform encourages young minds to develop groundbreaking business ideas, understand the dynamics of the market, and receive invaluable mentorship from experienced industry leaders. We are building the next generation of innovators and job creators.`
+                    },
+                    {
+                        key: 'innovation',
+                        title: 'Beyond the Textbook: Innovation at YES',
+                        content: `Innovation is not just a buzzword at DCM YES—it's a way of life. Our curriculum is forward-thinking, integrating cutting-edge technologies like <strong>Artificial Intelligence (AI), Augmented Reality (AR), Virtual Reality (VR), and Machine Learning (ML)</strong>. We foster an environment of curiosity, encouraging students to think creatively and solve real-world problems.`
+                    },
+                    {
+                        key: 'sports',
+                        title: 'Championing the Spirit: Sports Facilities',
+                        content: `We are dedicated to the holistic development of our students, which includes physical fitness and sportsmanship. Our school boasts expansive grounds for a wide range of sports, including football, cricket, basketball, and athletics. Under the guidance of our expert coaches, students are encouraged to pursue their passions and achieve sporting excellence.`
+                    },
+                    {
+                        key: 'global_programs',
+                        title: 'World-Ready: Global Programs & Exposure',
+                        content: `We prepare our students to be global citizens. Through partnerships with international schools and active participation in global forums and student exchange programs, we provide unique opportunities for cross-cultural learning. This exposure broadens their horizons and equips them with a global perspective essential for success in the modern world.`
+                    }
                 ];
+
+                // The primary options shown in the chat, including the new ones and a special key for the website link
+                this.primaryOptions = ['admissions', 'curriculum', 'facilities', 'contact', 'about_us', 'achievements', 'safety_security', 'health_wellness', 'yespreneurship', 'innovation', 'sports', 'global_programs', 'website'];
             }
 
-            /**
-             * Resets the internal state (e.g., question ask counts).
-             * In a real system, this might involve clearing session data on the backend.
-             */
-            resetState() {
-                this.questionAskCount = {};
+            async getStartData() {
+                // Simulate network latency
+                await new Promise(resolve => setTimeout(resolve, 500));
+                return {
+                    message: this.qaDatabase['start'].answer,
+                    options: this.primaryOptions
+                };
+            }
+            
+            async getAnswer(key) {
+                // Simulate network latency
+                await new Promise(resolve => setTimeout(resolve, 500));
+                const response = this.qaDatabase[key];
+                // Filter out the current key and the special 'website' key from follow-up questions
+                const followUpQuestions = this.primaryOptions.filter(opt => opt !== key && opt !== 'website');
+                return {
+                    question: response.question,
+                    answer: response.answer,
+                    options: followUpQuestions
+                };
+            }
+
+            async getFollowUpAnswer(key) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                const response = this.qaDatabase[key];
+                // Filter out the current key and the special 'website' key from follow-up questions
+                const followUpQuestions = this.primaryOptions.filter(opt => opt !== key && opt !== 'website');
+                return {
+                    question: response.question,
+                    answer: response.followUpAnswer,
+                    options: followUpQuestions
+                };
+            }
+            
+            getFaqContent() {
+                return this.faqContent;
+            }
+
+            getAllPrimaryOptionKeys() {
+                // Filter out the special 'website' key when retrieving all options
+                return this.primaryOptions.filter(opt => opt !== 'website');
             }
         }
 
-        // --- ChatUI: Manages DOM manipulation and user interaction ---
+        // --- ChatUI: Handles all UI rendering and user interactions ---
         class ChatUI {
             constructor(chatService) {
                 this.chatService = chatService;
-
-                this.messageContainer = document.getElementById('message-container');
                 this.chatWindow = document.getElementById('chat-window');
+                this.messageContainer = document.getElementById('message-container');
                 this.optionsWrapper = document.getElementById('options-wrapper');
-                this.dateDisplay = document.getElementById('date-display');
-                this.clearChatButton = document.getElementById('clear-chat-button');
                 this.scrollLeftBtn = document.getElementById('scroll-left-btn');
                 this.scrollRightBtn = document.getElementById('scroll-right-btn');
+                this.clearChatButton = document.getElementById('clear-chat-button');
+                this.stopReadingButton = document.getElementById('stop-reading-button');
+                this.tabAiChat = document.getElementById('tab-ai-chat');
+                this.tabFaqs = document.getElementById('tab-faqs');
+                this.aiChatContainer = document.getElementById('ai-chat-container');
+                this.faqContainer = document.getElementById('faq-container');
+                this.greetingText = document.getElementById('greeting-text');
 
+                this.speechSynth = window.speechSynthesis;
                 this.currentUtterance = null;
-                this.currentSpeakerIcon = null;
-                this.selectedVoice = null;
+                this.isPaused = false;
+                this.currentFaqButton = null;
 
-                this.initializeSpeechSynthesis();
-                this.addEventListeners();
+                this.bindEvents();
+                this.chatHistory = [];
             }
 
-            initializeSpeechSynthesis() {
-                if ('speechSynthesis' in window) {
-                    speechSynthesis.onvoiceschanged = () => {
-                        this.selectedVoice = this.getHumanLikeVoice();
-                        if (!this.selectedVoice) {
-                            console.warn("No suitable speech synthesis voice found. Using default or no voice if none available.");
-                        } else {
-                            console.log("Selected voice for speech synthesis:", this.selectedVoice.name);
-                        }
-                    };
-                    if (speechSynthesis.getVoices().length > 0) {
-                        this.selectedVoice = this.getHumanLikeVoice();
+            bindEvents() {
+                this.optionsWrapper.addEventListener('click', this.handleOptionClick.bind(this));
+                this.scrollLeftBtn.addEventListener('click', () => this.scrollOptions(-200));
+                this.scrollRightBtn.addEventListener('click', () => this.scrollOptions(200));
+                this.clearChatButton.addEventListener('click', this.clearChat.bind(this));
+                this.stopReadingButton.addEventListener('click', this.toggleSpeech.bind(this));
+                this.optionsWrapper.addEventListener('scroll', this.updateArrowVisibility.bind(this));
+                this.tabAiChat.addEventListener('click', () => this.handleTabClick('ai-chat'));
+                this.tabFaqs.addEventListener('click', () => this.handleTabClick('faqs'));
+            }
+
+            handleTabClick(tab) {
+                // Stop any ongoing speech before switching tabs
+                this.stopSpeech();
+                
+                // Remove active class from both tabs
+                this.tabAiChat.classList.remove('active');
+                this.tabFaqs.classList.remove('active');
+                
+                // Hide both content containers
+                this.aiChatContainer.style.display = 'none';
+                this.faqContainer.style.display = 'none';
+
+                if (tab === 'ai-chat') {
+                    this.tabAiChat.classList.add('active');
+                    this.aiChatContainer.style.display = 'flex';
+                    this.greetingText.textContent = 'How can I help you today?';
+                    this.initChat();
+                } else if (tab === 'faqs') {
+                    this.tabFaqs.classList.add('active');
+                    this.faqContainer.style.display = 'block';
+                    this.greetingText.textContent = 'From Cradle To Corporate';
+                    this.renderFaqs();
+                }
+            }
+
+            renderFaqs() {
+                this.faqContainer.innerHTML = '';
+                const faqData = this.chatService.getFaqContent();
+                faqData.forEach((faq, index) => {
+                    const section = document.createElement('div');
+                    section.classList.add('faq-section');
+                    section.style.animationDelay = `${index * 0.1}s`;
+
+                    const title = document.createElement('h2');
+                    title.textContent = faq.title;
+                    title.classList.add('font-playfair');
+                    
+                    const contentContainer = document.createElement('div');
+                    contentContainer.classList.add('faq-content-container');
+                    contentContainer.innerHTML = faq.content;
+
+                    // Create the read button
+                    const readButton = document.createElement('button');
+                    readButton.textContent = 'Read';
+                    readButton.classList.add('faq-read-btn');
+                    readButton.setAttribute('data-text', title.textContent + '. ' + contentContainer.textContent);
+                    readButton.addEventListener('click', () => this.toggleFaqSpeech(readButton));
+
+                    section.appendChild(readButton);
+                    section.appendChild(title);
+                    section.appendChild(contentContainer);
+                    this.faqContainer.appendChild(section);
+                });
+            }
+
+            // --- Chat functionality methods ---
+            async addMessage(text, sender) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('chat-bubble', sender === 'user' ? 'user-bubble' : 'bot-bubble');
+                
+                const content = document.createElement('div');
+                content.classList.add('message-text-content');
+                content.innerHTML = text;
+                
+                const timestamp = document.createElement('span');
+                timestamp.classList.add('timestamp');
+                timestamp.textContent = this.getCurrentTime();
+
+                bubble.appendChild(content);
+                bubble.appendChild(timestamp);
+
+                if (sender === 'bot') {
+                    // Create and add speaker icon for TTS
+                    const speakerIcon = document.createElement('i');
+                    speakerIcon.classList.add('fas', 'fa-volume-up', 'speaker-icon');
+                    speakerIcon.addEventListener('click', () => this.speakText(content.textContent));
+                    bubble.appendChild(speakerIcon);
+                }
+
+                this.messageContainer.appendChild(bubble);
+                this.chatHistory.push({ text, sender, timestamp: timestamp.textContent });
+                this.saveChat();
+                this.scrollToBottom();
+            }
+
+            // Centralized speech control function
+            speakText(text, button = null) {
+                this.stopSpeech();
+                this.currentUtterance = new SpeechSynthesisUtterance(text);
+                this.currentUtterance.pitch = 1.0;
+                this.currentUtterance.rate = 1.1;
+                this.currentUtterance.volume = 1.0;
+
+                this.currentUtterance.onstart = () => {
+                    this.stopReadingButton.textContent = 'Pause Reading';
+                    this.stopReadingButton.style.display = 'block';
+                    if (button) {
+                        this.currentFaqButton = button;
+                        this.updateFaqButtonState(button, 'Stop');
                     }
-                } else {
-                    console.warn("Web Speech API not supported in this browser.");
-                }
+                };
+
+                this.currentUtterance.onend = () => {
+                    this.stopReadingButton.style.display = 'none';
+                    this.stopReadingButton.textContent = 'Stop Reading';
+                    this.isPaused = false;
+                    if (this.currentFaqButton) {
+                        this.updateFaqButtonState(this.currentFaqButton, 'Read');
+                        this.currentFaqButton = null;
+                    }
+                    this.currentUtterance = null;
+                };
+
+                this.speechSynth.speak(this.currentUtterance);
             }
 
-            getHumanLikeVoice() {
-                const voices = speechSynthesis.getVoices();
-                let chosenVoice = null;
-                chosenVoice = voices.find(voice => voice.lang === 'en-US' && voice.name.includes('Google US English'));
-                if (chosenVoice) return chosenVoice;
-                chosenVoice = voices.find(voice => voice.lang.startsWith('en-') && (voice.name.includes('Google') || voice.name.includes('Microsoft')));
-                if (chosenVoice) return chosenVoice;
-                chosenVoice = voices.find(voice => voice.lang.startsWith('en-'));
-                if (chosenVoice) return chosenVoice;
-                return voices[0] || null;
-            }
-
-            stopSpeaking(iconElement, originalTextContent) {
-                if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
-                    window.speechSynthesis.cancel();
+            stopSpeech() {
+                if (this.speechSynth.speaking) {
+                    this.speechSynth.cancel();
                 }
-                if (iconElement && iconElement === this.currentSpeakerIcon) {
-                    iconElement.className = 'fas fa-volume-up speaker-icon';
-                    iconElement.onclick = () => this.speakText(originalTextContent, iconElement);
+                this.stopReadingButton.style.display = 'none';
+                this.stopReadingButton.textContent = 'Stop Reading';
+                this.isPaused = false;
+                if (this.currentFaqButton) {
+                    this.updateFaqButtonState(this.currentFaqButton, 'Read');
+                    this.currentFaqButton = null;
                 }
                 this.currentUtterance = null;
-                this.currentSpeakerIcon = null;
             }
 
-            speakText(text, iconElement) {
-                if (!('speechSynthesis' in window)) {
-                    console.warn("Web Speech API not supported.");
+            toggleSpeech() {
+                if (!this.currentUtterance) {
+                    this.stopSpeech();
                     return;
                 }
 
-                if (window.speechSynthesis.speaking) {
-                    const previouslySpeakingIconText = this.currentSpeakerIcon ? (this.currentSpeakerIcon.closest('.chat-bubble')?.querySelector('.message-text-content')?.textContent || '') : '';
-                    this.stopSpeaking(this.currentSpeakerIcon, previouslySpeakingIconText);
+                if (this.speechSynth.speaking && !this.isPaused) {
+                    this.speechSynth.pause();
+                    this.isPaused = true;
+                    this.stopReadingButton.textContent = 'Resume Reading';
+                } else if (this.speechSynth.speaking && this.isPaused) {
+                    this.speechSynth.resume();
+                    this.isPaused = false;
+                    this.stopReadingButton.textContent = 'Pause Reading';
+                } else {
+                    this.stopSpeech();
                 }
-
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                if (this.selectedVoice) {
-                    utterance.voice = this.selectedVoice;
-                }
-
-                this.currentUtterance = utterance;
-                this.currentSpeakerIcon = iconElement;
-
-                if (iconElement) {
-                    iconElement.className = 'fas fa-volume-mute speaker-icon';
-                    iconElement.onclick = () => this.stopSpeaking(iconElement, text);
-                }
-
-                utterance.onend = () => this.stopSpeaking(iconElement, text);
-                utterance.oncancel = () => this.stopSpeaking(iconElement, text);
-                utterance.onerror = (event) => {
-                    console.error('Speech synthesis error:', event.error);
-                    this.stopSpeaking(iconElement, text);
-                };
-
-                window.speechSynthesis.speak(utterance);
             }
 
-            addEventListeners() {
-                this.clearChatButton.addEventListener('click', this.clearChat.bind(this));
-                this.scrollLeftBtn.addEventListener('click', () => this.scrollOptions('left'));
-                this.scrollRightBtn.addEventListener('click', () => this.scrollOptions('right'));
-                this.optionsWrapper.addEventListener('scroll', this.updateArrowVisibility.bind(this));
-                window.addEventListener('resize', this.updateArrowVisibility.bind(this));
+            toggleFaqSpeech(button) {
+                const text = button.getAttribute('data-text');
+                
+                // If the same FAQ is already playing, stop it.
+                if (this.currentUtterance && this.currentFaqButton === button) {
+                    this.stopSpeech();
+                    return;
+                }
+
+                // Stop any other current speech (FAQ or chat bubble)
+                this.stopSpeech();
+                
+                // Start speaking the new text
+                this.speakText(text, button);
             }
 
+            updateFaqButtonState(button, state) {
+                const allButtons = this.faqContainer.querySelectorAll('.faq-read-btn');
+                allButtons.forEach(btn => {
+                    if (btn === button) {
+                        btn.textContent = state;
+                        if (state === 'Stop') {
+                            btn.classList.add('stop');
+                        } else {
+                            btn.classList.remove('stop');
+                        }
+                    } else {
+                        btn.textContent = 'Read';
+                        btn.classList.remove('stop');
+                    }
+                });
+            }
+
+            handleOptionClick(event) {
+                const button = event.target.closest('.option-button');
+                if (!button || button.classList.contains('website-button')) return;
+
+                const selectedOption = button.dataset.key;
+                this.addMessage(button.textContent, 'user');
+                this.clearOptions();
+                this.getBotResponse(selectedOption);
+            }
+
+            async getBotResponse(key) {
+                const typingIndicator = this.showTypingIndicator();
+                try {
+                    const response = await this.chatService.getAnswer(key);
+                    this.hideTypingIndicator(typingIndicator);
+                    await this.addMessage(response.answer, 'bot');
+                    setTimeout(() => {
+                        this.showOptions(response.options);
+                    }, 300);
+                } catch (error) {
+                    console.error("Error fetching bot response:", error);
+                    this.hideTypingIndicator(typingIndicator);
+                    await this.addMessage("Sorry, I'm unable to get that information right now. Please try again later.", 'bot');
+                }
+            }
+
+            showOptions(options) {
+                this.clearOptions();
+                // Flag to check if we are showing a special button
+                let specialButtonAdded = false;
+
+                options.forEach((key, index) => {
+                    if (key === 'website') {
+                        // Create a distinct button for the website link
+                        const websiteButton = document.createElement('button');
+                        websiteButton.classList.add('option-button', 'website-button');
+                        websiteButton.innerHTML = 'Go to Website <i class="fas fa-external-link-alt ml-2"></i>';
+                        websiteButton.onclick = () => window.open('https://dcmyesschool.com', '_blank');
+                        websiteButton.style.animationDelay = `${index * 0.05}s`;
+                        this.optionsWrapper.appendChild(websiteButton);
+                        specialButtonAdded = true;
+                    } else {
+                        const optionData = this.chatService.qaDatabase[key];
+                        if (optionData) {
+                            const button = document.createElement('button');
+                            button.classList.add('option-button');
+                            button.textContent = optionData.question;
+                            button.dataset.key = key;
+                            button.style.animationDelay = `${index * 0.05}s`;
+                            this.optionsWrapper.appendChild(button);
+                        }
+                    }
+                });
+
+                this.updateArrowVisibility();
+            }
+
+            clearOptions() {
+                this.optionsWrapper.innerHTML = '';
+            }
+
+            clearChat() {
+                this.stopSpeech(); // Stop any speech when clearing chat
+                this.messageContainer.innerHTML = '';
+                this.chatHistory = [];
+                localStorage.removeItem('chatHistory');
+                this.optionsWrapper.innerHTML = '';
+                this.initChat();
+            }
+
+            // --- UI utility methods ---
+            scrollToBottom() {
+                this.chatWindow.scrollTop = this.chatWindow.scrollHeight;
+            }
+
+            getCurrentTime() {
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                return `${hours}:${minutes}`;
+            }
+
+            showTypingIndicator() {
+                const indicator = document.createElement('div');
+                indicator.classList.add('typing-indicator', 'bot-bubble');
+                indicator.innerHTML = '<span></span><span></span><span></span>';
+                this.messageContainer.appendChild(indicator);
+                this.scrollToBottom();
+                return indicator;
+            }
+
+            hideTypingIndicator(indicator) {
+                if (indicator) {
+                    indicator.remove();
+                }
+            }
+            
+            scrollOptions(amount) {
+                this.optionsWrapper.scrollLeft += amount;
+            }
+
+            updateArrowVisibility() {
+                const { scrollLeft, scrollWidth, clientWidth } = this.optionsWrapper;
+                this.scrollLeftBtn.classList.toggle('disabled', scrollLeft === 0);
+                this.scrollRightBtn.classList.toggle('disabled', scrollLeft + clientWidth >= scrollWidth);
+            }
+
+            // --- Local storage for chat history ---
             saveChat() {
-                localStorage.setItem('chatMessages', this.messageContainer.innerHTML);
+                localStorage.setItem('chatHistory', JSON.stringify(this.chatHistory));
             }
 
             loadChat() {
-                const savedChat = localStorage.getItem('chatMessages');
-                if (savedChat) {
-                    if (savedChat.trim().length < 50) {
-                        console.warn("Detected potentially malformed or too short chat history in localStorage. Clearing it.");
-                        localStorage.removeItem('chatMessages');
-                        this.messageContainer.innerHTML = '';
-                        return false;
-                    }
-                    this.messageContainer.innerHTML = savedChat;
-                    this.messageContainer.querySelectorAll('.bot-bubble .speaker-icon').forEach(icon => {
-                        const textContentElement = icon.closest('.chat-bubble').querySelector('.message-text-content');
-                        const plainText = textContentElement ? (textContentElement.textContent || textContentElement.innerText || '').trim() : '';
-                        icon.onclick = () => this.speakText(plainText, icon);
-                        icon.setAttribute('aria-label', 'Read message aloud');
+                const history = localStorage.getItem('chatHistory');
+                if (history) {
+                    this.chatHistory = JSON.parse(history);
+                    this.chatHistory.forEach(msg => {
+                        const bubble = document.createElement('div');
+                        bubble.classList.add('chat-bubble', msg.sender === 'user' ? 'user-bubble' : 'bot-bubble');
+                        bubble.style.opacity = '1';
+                        bubble.style.transform = 'translateY(0)';
+                        
+                        const content = document.createElement('div');
+                        content.classList.add('message-text-content');
+                        content.innerHTML = msg.text;
+
+                        const timestamp = document.createElement('span');
+                        timestamp.classList.add('timestamp');
+                        timestamp.textContent = msg.timestamp;
+
+                        bubble.appendChild(content);
+                        bubble.appendChild(timestamp);
+
+                        if (msg.sender === 'bot') {
+                            const speakerIcon = document.createElement('i');
+                            speakerIcon.classList.add('fas', 'fa-volume-up', 'speaker-icon');
+                            speakerIcon.addEventListener('click', () => this.speakText(content.textContent));
+                            bubble.appendChild(speakerIcon);
+                        }
+
+                        this.messageContainer.appendChild(bubble);
                     });
                     this.scrollToBottom();
                     return true;
@@ -723,212 +1183,20 @@
                 return false;
             }
 
-            getCurrentTime() {
-                const now = new Date();
-                return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            }
+            async initChat() {
+                // Check if chat history exists and has messages
+                const history = localStorage.getItem('chatHistory');
+                const chatHistoryExists = history && JSON.parse(history).length > 0;
 
-            displayCurrentDate() {
-                const now = new Date();
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                this.dateDisplay.textContent = now.toLocaleDateString('en-US', options);
-            }
-
-            scrollToBottom() {
-                this.chatWindow.scrollTo({
-                    top: this.chatWindow.scrollHeight,
-                    behavior: 'smooth'
-                });
-            }
-
-            addMessage(text, sender, delay = 0) {
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        const messageDiv = document.createElement('div');
-                        messageDiv.className = `chat-bubble ${sender === 'bot' ? 'bot-bubble' : 'user-bubble'}`;
-                        messageDiv.setAttribute('role', 'status');
-
-                        const textContentSpan = document.createElement('span');
-                        textContentSpan.innerHTML = text;
-                        textContentSpan.classList.add('message-text-content');
-
-                        const timeSpan = document.createElement('span');
-                        timeSpan.className = 'timestamp';
-                        timeSpan.textContent = this.getCurrentTime();
-
-                        if (sender === 'bot') {
-                            const contentWrapper = document.createElement('div');
-                            contentWrapper.style.display = 'flex';
-                            contentWrapper.style.flexDirection = 'column';
-                            contentWrapper.style.flexGrow = '1';
-
-                            contentWrapper.appendChild(textContentSpan);
-                            contentWrapper.appendChild(timeSpan);
-
-                            messageDiv.appendChild(contentWrapper);
-
-                            const plainText = textContentSpan.textContent || textContentSpan.innerText || '';
-                            const speakerIcon = document.createElement('i');
-                            speakerIcon.className = 'fas fa-volume-up speaker-icon';
-                            speakerIcon.title = 'Read aloud';
-                            speakerIcon.setAttribute('aria-label', 'Read message aloud');
-                            speakerIcon.onclick = () => this.speakText(plainText, speakerIcon);
-                            messageDiv.appendChild(speakerIcon);
-
-                        } else {
-                            messageDiv.appendChild(textContentSpan);
-                            messageDiv.appendChild(timeSpan);
-                        }
-
-                        this.messageContainer.appendChild(messageDiv);
-                        this.scrollToBottom();
-                        this.saveChat();
-                        resolve(messageDiv); // Resolve when message is added
-                    }, delay);
-                });
-            }
-
-            showTypingIndicator() {
-                const indicatorDiv = document.createElement('div');
-                indicatorDiv.className = 'typing-indicator bot-bubble';
-                indicatorDiv.innerHTML = '<span></span><span></span><span></span>';
-                indicatorDiv.setAttribute('aria-live', 'off');
-                this.messageContainer.appendChild(indicatorDiv);
-                this.scrollToBottom();
-                return indicatorDiv;
-            }
-
-            hideTypingIndicator(indicatorDiv) {
-                if (indicatorDiv && this.messageContainer.contains(indicatorDiv)) {
-                    this.messageContainer.removeChild(indicatorDiv);
-                }
-            }
-
-            showOptions(optionKeys) {
-                this.optionsWrapper.innerHTML = '';
-                this.optionsWrapper.setAttribute('aria-hidden', 'false');
-
-                if (!optionKeys || optionKeys.length === 0) {
-                    this.updateArrowVisibility();
-                    this.optionsWrapper.setAttribute('aria-hidden', 'true');
-                    return;
-                }
-
-                optionKeys.forEach((key, index) => {
-                    // We need the question text from the service's qaDatabase
-                    const questionData = this.chatService.qaDatabase[key];
-                    if (!questionData || !questionData.question) {
-                        console.warn(`Question for key "${key}" not found in qaDatabase.`);
-                        return;
-                    }
-
-                    const button = document.createElement('button');
-                    button.textContent = questionData.question;
-                    button.className = 'option-button';
-                    button.dataset.key = key;
-                    button.setAttribute('role', 'button');
-                    button.setAttribute('aria-label', `Ask about ${questionData.question}`);
-
-                    button.style.animationDelay = `${index * 0.05}s`;
-
-                    button.addEventListener('click', this.handleOptionClick.bind(this));
-                    this.optionsWrapper.appendChild(button);
-                });
-                this.updateArrowVisibility();
-            }
-
-            async handleOptionClick(event) {
-                const key = event.currentTarget.dataset.key;
-
-                this.stopSpeaking(this.currentSpeakerIcon, '');
-
-                const questionText = this.chatService.qaDatabase[key]?.question;
-                if (questionText) {
-                    await this.addMessage(questionText, 'user');
-                } else {
-                    console.error(`Question text not found for key: ${key}`);
-                    return;
-                }
+                this.clearOptions();
                 
-                this.optionsWrapper.innerHTML = '';
-                this.optionsWrapper.setAttribute('aria-hidden', 'true');
-                this.updateArrowVisibility();
-
-                if (key === 'website' && this.chatService.qaDatabase[key].url) {
-                    await this.addMessage(this.chatService.qaDatabase[key].answer, 'bot');
-                    setTimeout(() => {
-                        window.open(this.chatService.qaDatabase[key].url, '_blank');
-                        this.showOptions(this.chatService.getAllPrimaryOptionKeys());
-                    }, 500);
+                if (chatHistoryExists) {
+                    // If history exists, just load it and show options
+                    this.loadChat();
+                    // Pass the complete list of options including the 'website' key
+                    this.showOptions(this.chatService.primaryOptions);
                 } else {
-                    const typingIndicator = this.showTypingIndicator();
-                    try {
-                        const response = await this.chatService.getAnswer(key);
-                        this.hideTypingIndicator(typingIndicator);
-                        await this.addMessage(response.answer, 'bot');
-                        setTimeout(() => {
-                            this.showOptions(response.options);
-                        }, 300);
-                    } catch (error) {
-                        console.error("Error fetching answer:", error);
-                        this.hideTypingIndicator(typingIndicator);
-                        await this.addMessage("I'm sorry, I couldn't retrieve that information at the moment. Please try again later.", 'bot');
-                        setTimeout(() => {
-                            this.showOptions(this.chatService.getAllPrimaryOptionKeys());
-                        }, 300);
-                    }
-                }
-            }
-
-            async clearChat() {
-                this.stopSpeaking(this.currentSpeakerIcon, '');
-                localStorage.removeItem('chatMessages');
-                this.messageContainer.innerHTML = '';
-                this.chatService.resetState(); // Reset state in the service
-                await this.startChat();
-            }
-
-            scrollOptions(direction) {
-                const scrollAmount = this.optionsWrapper.clientWidth * 0.7;
-                if (direction === 'left') {
-                    this.optionsWrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                } else {
-                    this.optionsWrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                }
-            }
-
-            updateArrowVisibility() {
-                setTimeout(() => {
-                    const { scrollLeft, scrollWidth, clientWidth } = this.optionsWrapper;
-
-                    if (scrollWidth <= clientWidth) {
-                        this.scrollLeftBtn.classList.add('hidden', 'disabled');
-                        this.scrollRightBtn.classList.add('hidden', 'disabled');
-                        return;
-                    } else {
-                        this.scrollLeftBtn.classList.remove('hidden');
-                        this.scrollRightBtn.classList.remove('hidden');
-                    }
-
-                    if (scrollLeft <= 2) {
-                        this.scrollLeftBtn.classList.add('disabled');
-                    } else {
-                        this.scrollLeftBtn.classList.remove('disabled');
-                    }
-
-                    if (scrollLeft + clientWidth >= scrollWidth - 2) {
-                        this.scrollRightBtn.classList.add('disabled');
-                    } else {
-                        this.scrollRightBtn.classList.remove('disabled');
-                    }
-                }, 100);
-            }
-
-            async startChat() {
-                this.displayCurrentDate();
-                const chatLoaded = this.loadChat();
-
-                if (!chatLoaded || this.messageContainer.children.length === 0) {
+                    // If no history, show the welcome message for the first time
                     const typingIndicator = this.showTypingIndicator();
                     try {
                         const startData = await this.chatService.getStartData();
@@ -942,8 +1210,6 @@
                         this.hideTypingIndicator(typingIndicator);
                         await this.addMessage("Welcome! I'm currently experiencing some issues. Please try again later.", 'bot');
                     }
-                } else {
-                    this.showOptions(this.chatService.getAllPrimaryOptionKeys());
                 }
                 this.updateArrowVisibility();
             }
@@ -953,7 +1219,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const chatService = new ChatService();
             const chatUI = new ChatUI(chatService);
-            chatUI.startChat();
+            // Start the chat by default when the AI Chat tab is active
+            chatUI.handleTabClick('ai-chat');
         });
     </script>
 </body>
