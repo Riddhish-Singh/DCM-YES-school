@@ -1,67 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCM YES School - FAQ Chatbot</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DCM YES School - FAQ Chatbot</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-white flex items-center justify-center min-h-screen p-0 m-0">
-    <!-- Main wrapper for the entire application -->
-    <div class="w-full h-screen max-w-none max-h-none flex flex-col bg-white overflow-hidden main-app-wrapper rounded-xl shadow-lg">
+<body class="bg-white flex items-center justify-center min-h-screen m-0 p-0">
 
-        <!-- Header containing logo and tabs -->
-        <header class="bg-gradient-red text-white p-4 flex items-center shadow-md z-10">
-            <div class="flex items-center">
-                <a href="https://dcmyesschool.com" target="_blank" class="logo-link" aria-label="Visit DCM YES School Website">
-                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                        <img src="logo.png" alt="DCM YES School Logo - Click to visit website" class="w-10 h-10 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/e51f17?text=DCM+Logo';">
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold">DCM YES School</h1>
-                        <p id="greeting-text" class="text-sm opacity-90">How can I help you today?</p>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="header-tabs flex items-center">
-                <button id="tab-ai-chat" class="tab-button-header active">AI Chat</button>
-                <button id="tab-faqs" class="tab-button-header">FAQs</button>
-                <button id="clear-chat-button" class="ml-4" aria-label="Clear Chat History">Clear Chat</button>
-                <button id="stop-reading-button" aria-label="Stop Reading Aloud">Stop Reading</button>
-            </div>
-        </header>
+  <div class="w-full h-screen flex flex-col bg-white overflow-hidden main-app-wrapper rounded-xl shadow-lg">
+    
+    <header class="bg-gradient-red text-white p-4 flex items-center shadow-md z-10">
+      <div class="flex items-center">
+        <a href="https://dcmyesschool.com" target="_blank" class="logo-link flex items-center">
+          <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center mr-4">
+            <img src="logo.png" alt="DCM YES School Logo" class="w-10 h-10 object-contain"
+              onerror="this.onerror=null;this.src='https://placehold.co/40x40/ffffff/e51f17?text=DCM+Logo';">
+          </div>
+          <div>
+            <h1 class="text-xl font-bold">DCM YES School</h1>
+            <p id="greeting-text" class="text-sm opacity-90">How can I help you today?</p>
+          </div>
+        </a>
+      </div>
+      <div class="header-tabs flex items-center ml-auto" role="tablist">
+        <button id="tab-ai-chat" class="tab-button-header active" role="tab" aria-controls="ai-chat-container">AI Chat</button>
+        <button id="tab-faqs" class="tab-button-header" role="tab" aria-controls="faq-container">FAQs</button>
+        <button id="clear-chat-button" class="ml-4" aria-label="Clear chat">Clear Chat</button>
+        <button id="stop-reading-button" aria-label="Stop text-to-speech">Stop Reading</button>
+      </div>
+    </header>
 
-        <!-- AI Chat Container -->
-        <div id="ai-chat-container" class="w-full h-full flex flex-col bg-white overflow-hidden chat-container-animate">
-            <main id="chat-window" class="flex-1 p-4 md:p-6 overflow-y-auto" role="log" aria-live="polite" aria-atomic="false">
-                <div id="date-display" class="text-center text-gray-500 text-sm mb-4"></div>
-                <div id="message-container" class="flex flex-col space-y-4"></div>
-            </main>
-
-            <footer id="options-container" class="p-4 border-t border-gray-200 bg-gray-50 overflow-hidden flex items-center justify-content-center">
-                <button id="scroll-left-btn" class="scroll-arrow mr-2" aria-label="Scroll options left"><i class="fas fa-chevron-left"></i></button>
-                <div id="options-wrapper" class="flex-1 overflow-x-hidden" role="group" aria-label="Available questions"></div>
-                <button id="scroll-right-btn" class="scroll-arrow ml-2" aria-label="Scroll options right"><i class="fas fa-chevron-right"></i></button>
-            </footer>
-        </div>
-
-        <!-- FAQs Container (initially hidden) -->
-        <div id="faq-container" class="w-full h-full overflow-y-auto">
-            <!-- FAQ content will be dynamically generated here -->
-        </div>
-        
-		<div style="text-align: center; padding-top: 10px; padding-bottom: 20px; font-size: 0.8em; color: #777;">
-            Created by Riddhish, a 10-year-old student from Grade 6.
-        </div>
+    <div id="ai-chat-container" class="w-full h-full flex flex-col bg-white overflow-hidden chat-container-animate" role="tabpanel">
+      <main id="chat-window" class="flex-1 p-4 md:p-6 overflow-y-auto" role="log" aria-live="polite">
+        <div id="date-display" class="text-center text-gray-500 text-sm mb-4"></div>
+        <div id="message-container" class="flex flex-col space-y-4"></div>
+      </main>
+      <footer id="options-container" class="p-4 border-t border-gray-200 bg-gray-50 flex items-center justify-center">
+        <button id="scroll-left-btn" class="scroll-arrow mr-2" aria-label="Scroll options left">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div id="options-wrapper" class="flex-1 overflow-x-hidden"></div>
+        <button id="scroll-right-btn" class="scroll-arrow ml-2" aria-label="Scroll options right">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </footer>
     </div>
 
-<script src="app.js" defer></script>
+    <section id="faq-container" class="faq-section hidden" role="tabpanel">
+      <div class="p-4 overflow-y-auto h-full">
+        <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions – DCM YES School</h2>
+        <div class="space-y-4">
+          
+          <details class="faq-item">
+            <summary class="faq-summary">Q1: What is the vision of DCM YES School?</summary>
+            <p class="faq-answer">Founded in 1946 by Late Shri M. R. Dass, our vision is “From Cradle to Corporate,” which means nurturing students from early years to global career readiness. We blend traditional values with future-facing technologies like AI, AR, VR, and ML.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q2: When do admissions open and how do I apply?</summary>
+            <p class="faq-answer">Admissions begin every November for the new academic session. Visit our <a href="https://dcmyesschool.com">official website</a> or contact the admissions team for eligibility, documentation, and process details.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q3: What curriculum does the school follow?</summary>
+            <p class="faq-answer">We follow the CBSE curriculum, enhanced with proprietary programs like Mother’s Lap, CCLICK, SLITEE, and CLASSE, ensuring holistic academic, emotional, and social development.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q4: What facilities are available on campus?</summary>
+            <ul class="list-disc list-inside faq-answer">
+              <li>Smart Classrooms with interactive tech</li>
+              <li>Advanced labs for AI, Robotics, Sciences, and more</li>
+              <li>Modern Library (Print + Digital)</li>
+              <li>Expansive sports infrastructure with trained coaches</li>
+              <li>Etiquette Villa to foster soft skills and leadership</li>
+              <li>Amusement Zone for early learners</li>
+            </ul>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q5: Does the school offer international programs?</summary>
+            <p class="faq-answer">Yes, students can opt for a Dual Diploma through our partnership with Houghton Academy, New York, enabling them to earn both Indian and U.S. high school credentials.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q6: What is the “Earn While You Learn” program?</summary>
+            <p class="faq-answer">This initiative provides students with internship opportunities during school, helping them gain real-world professional experience early on.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q7: How does the school support entrepreneurship?</summary>
+            <p class="faq-answer">Our Entrepreneurial Development Platform empowers students to ideate, build, and present startups through mentorship, incubation, and exposure to global events.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q8: What are the contact details for parent queries?</summary>
+            <address class="faq-answer not-italic">
+              <strong>Phone:</strong> +91-161-3510099<br>
+              <strong>Mobile:</strong> +91-8728893030<br>
+              <strong>Email:</strong> contact@dcmyesschool.com<br>
+              <strong>Admissions:</strong> admissions@dcmyesschool.com<br>
+              <strong>Campus:</strong> Block-B, Rajguru Nagar, Ludhiana
+            </address>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q9: What security measures are in place on campus?</summary>
+            <p class="faq-answer">DCM YES School is under 24/7 CCTV surveillance and staffed by trained security professionals, ensuring a safe and emotionally secure environment for students.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q10: How does the school promote health and wellness?</summary>
+            <p class="faq-answer">We offer a fully-equipped health clinic, regular health check-ups, mental wellness workshops, and nutrition guidance to ensure physical and mental well-being.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q11: What is Yespreneurship?</summary>
+            <p class="faq-answer">Yespreneurship is our unique entrepreneurship initiative where students learn business planning, pitch ideas, and connect with real-world mentors and investors — all while in school.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q12: How is technology integrated into student learning?</summary>
+            <p class="faq-answer">Students actively learn and use technologies like Artificial Intelligence, Machine Learning, Augmented Reality, and Virtual Reality to solve real-world problems.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q13: What sports are offered at the school?</summary>
+            <p class="faq-answer">We offer structured training in football, cricket, basketball, athletics, and more, with expert coaches. Physical education is treated as vital as academics.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">Q14: How does the school prepare students to be global citizens?</summary>
+            <p class="faq-answer">Through global exchange programs, partnerships, and participation in international conferences, students develop cross-cultural understanding and leadership skills.</p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center py-4 text-xs text-gray-500">
+      <p>Created by Riddhish, a 10-year-old student from Grade 6.</p>
+    </footer>
+  </div>
+
+  <script src="app.js" defer></script>
 </body>
 </html>

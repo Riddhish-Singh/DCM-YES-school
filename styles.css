@@ -547,4 +547,48 @@
                 font-size: 0.8em;
             }
         }
+/* styles.css */
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+.faq-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.faq-section h2 {
+  font-size: 2rem;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.faq-item {
+  margin-bottom: 2rem;
+}
+
+.faq-item h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.faq-item p, .faq-item ul, .faq-item li {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.faq-item ul {
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
 		</style>
