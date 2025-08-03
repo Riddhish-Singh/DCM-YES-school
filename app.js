@@ -69,28 +69,24 @@ class ChatService {
                 followUpAnswer: 'We offer global exposure through collaborations with international schools and participation in forums and exchange programs, helping students develop a global perspective.'
             }
         };
-        
+
         // An array of key-value pairs for displaying the FAQs directly.
-        this.faqContent = [
-  {
-    key: 'about_us',
-    title: 'How has DCM YES School built its legacy of excellence over the years?',
-    content: `DCM YES School has proudly shaped the future of over 112,500 students since its founding in 1946 by Late Shri M R Dass. With a vision of "From Cradle to Corporate," we combine timeless values with modern educational practices. Our commitment to innovation, entrepreneurship, and future-focused learning—including AI, AR, VR, and ML—prepares students to thrive in a rapidly changing world.`
-  },
-  {
-    key: 'admissions',
-    title: 'What is the step-by-step admission process at DCM YES?',
-    content: `The admission process typically begins in November for the next academic session. You’ll find details on eligibility, required documents, timelines, and more on our <a href="https://dcmyesschool.com/contact" class="text-theme-blue font-semibold" target="_blank">official admissions page</a>. We encourage you to explore and take the first step toward becoming part of the DCM YES family.`
-  },
-  {
-    key: 'curriculum',
-    title: 'What kind of curriculum does DCM YES School follow?',
-    content: `We follow the esteemed CBSE curriculum, enhanced with our own specialized programs designed for holistic development. These include <strong>Mother's Lap, CCLICK, SLITEE, and CLASSE</strong>, which support students across different age groups. The curriculum is rich in both academics and co-curricular opportunities, offering a well-rounded learning experience.`
-  },
-  {
-    key: 'facilities',
-    title: 'What modern facilities are available at DCM YES School?',
-    content: `Our campus features:<ul class="list-disc list-inside mt-2">
+        this.faqContent = [{
+            key: 'about_us',
+            title: 'How has DCM YES School built its legacy of excellence over the years?',
+            content: `DCM YES School has proudly shaped the future of over 112,500 students since its founding in 1946 by Late Shri M R Dass. With a vision of "From Cradle to Corporate," we combine timeless values with modern educational practices. Our commitment to innovation, entrepreneurship, and future-focused learning—including AI, AR, VR, and ML—prepares students to thrive in a rapidly changing world.`
+        }, {
+            key: 'admissions',
+            title: 'What is the step-by-step admission process at DCM YES?',
+            content: `The admission process typically begins in November for the next academic session. You’ll find details on eligibility, required documents, timelines, and more on our <a href="https://dcmyesschool.com/contact" class="text-theme-blue font-semibold" target="_blank">official admissions page</a>. We encourage you to explore and take the first step toward becoming part of the DCM YES family.`
+        }, {
+            key: 'curriculum',
+            title: 'What kind of curriculum does DCM YES School follow?',
+            content: `We follow the esteemed CBSE curriculum, enhanced with our own specialized programs designed for holistic development. These include <strong>Mother's Lap, CCLICK, SLITEE, and CLASSE</strong>, which support students across different age groups. The curriculum is rich in both academics and co-curricular opportunities, offering a well-rounded learning experience.`
+        }, {
+            key: 'facilities',
+            title: 'What modern facilities are available at DCM YES School?',
+            content: `<ul class="list-disc list-inside mt-2">
       <li><strong>Smart Classrooms:</strong> Fully digital for interactive learning</li>
       <li><strong>Ultra-Modern Labs:</strong> For Physics, Chemistry, Biology, Social Studies, Maths, AI/Robotics, and languages</li>
       <li><strong>Hi-tech Library:</strong> Stocked with vast knowledge resources</li>
@@ -98,58 +94,49 @@ class ChatService {
       <li><strong>Kids Amusement Park:</strong> Fun zones with themed rides</li>
       <li><strong>Etiquette Villa:</strong> A unique area for personality and grooming skills</li>
     </ul>`
-  },
-  {
-    key: 'achievements',
-    title: 'What are some of the unique achievements of DCM YES School?',
-    content: `<ul class="list-disc list-inside mt-2">
+        }, {
+            key: 'achievements',
+            title: 'What are some of the unique achievements of DCM YES School?',
+            content: `<ul class="list-disc list-inside mt-2">
       <li><strong>Dual Diplomas:</strong> In collaboration with Houghton Academy, USA</li>
       <li><strong>Earn While You Learn:</strong> Internships that build real-world experience</li>
       <li><strong>Entrepreneurial Platform:</strong> Fostering the next generation of leaders</li>
       <li><strong>Global Collaborations:</strong> Participation in global events like the World Entrepreneurship Summit</li>
     </ul>`
-  },
-  {
-    key: 'contact',
-    title: 'How can I contact DCM YES School for queries or admissions?',
-    content: `You can reach us via:<br><br>
+        }, {
+            key: 'contact',
+            title: 'How can I contact DCM YES School for queries or admissions?',
+            content: `You can reach us via:<br><br>
       <strong>Phone:</strong> <a href="tel:+911613510099" class="text-theme-blue font-semibold">+91-161-3510099</a><br>
       <strong>Mobile:</strong> <a href="tel:+918728893030" class="text-theme-blue font-semibold">+91-8728893030</a><br>
       <strong>General Email:</strong> <a href="mailto:contact@dcmyesschool.com" class="text-theme-blue font-semibold">contact@dcmyesschool.com</a><br>
       <strong>Admissions Email:</strong> <a href="mailto:admissions@dcmyesschool.com" class="text-theme-blue font-semibold">admissions@dcmyesschool.com</a><br><br>
       <strong>Campus Address:</strong> DCM Young Entrepreneurs School, Block-B, Rajguru Nagar, Ludhiana, Punjab - 141012 (India)`
-  },
-  {
-    key: 'safety_security',
-    title: 'How does DCM YES ensure safety and security for students?',
-    content: `Our campus is under 24/7 CCTV surveillance and secured by trained security personnel. We are deeply committed to creating a safe and nurturing environment where students can thrive, both emotionally and physically.`
-  },
-  {
-    key: 'health_wellness',
-    title: 'What health and wellness services are available at the school?',
-    content: `We have a fully equipped health clinic with a qualified nurse available during school hours. Regular health check-ups and wellness workshops are conducted to promote mental and physical well-being among students.`
-  },
-  {
-    key: 'yespreneurship',
-    title: 'What is the Yespreneurship program at DCM YES?',
-    content: `Yespreneurship is our signature program that develops entrepreneurial thinking in students. It helps them ideate, prototype, and pitch business ideas while receiving mentorship from experienced entrepreneurs.`
-  },
-  {
-    key: 'innovation',
-    title: 'How is innovation integrated into the school’s learning approach?',
-    content: `Innovation is woven into our curriculum through the integration of technologies like AI, AR, VR, and ML. Students are encouraged to solve real-world problems and explore creative solutions in a hands-on learning environment.`
-  },
-  {
-    key: 'sports',
-    title: 'What kind of sports and athletic programs are offered?',
-    content: `Our school offers professional coaching in football, cricket, basketball, athletics, and more. With expansive fields and modern sports infrastructure, students are motivated to excel in both team and individual sports.`
-  },
-  {
-    key: 'global_programs',
-    title: 'How does DCM YES provide global exposure to students?',
-    content: `We offer international exchange programs, global partnerships, and participation in world forums. These experiences help students gain cross-cultural understanding and prepare them for global opportunities in academics and careers.`
-  }
-];
+        }, {
+            key: 'safety_security',
+            title: 'How does DCM YES ensure safety and security for students?',
+            content: `Our campus is under 24/7 CCTV surveillance and secured by trained security personnel. We are deeply committed to creating a safe and nurturing environment where students can thrive, both emotionally and physically.`
+        }, {
+            key: 'health_wellness',
+            title: 'What health and wellness services are available at the school?',
+            content: `We have a fully equipped health clinic with a qualified nurse available during school hours. Regular health check-ups and wellness workshops are conducted to promote mental and physical well-being among students.`
+        }, {
+            key: 'yespreneurship',
+            title: 'What is the Yespreneurship program at DCM YES?',
+            content: `Yespreneurship is our signature program that develops entrepreneurial thinking in students. It helps them ideate, prototype, and pitch business ideas while receiving mentorship from experienced entrepreneurs.`
+        }, {
+            key: 'innovation',
+            title: 'How is innovation integrated into the school’s learning approach?',
+            content: `Innovation is woven into our curriculum through the integration of technologies like AI, AR, VR, and ML. Students are encouraged to solve real-world problems and explore creative solutions in a hands-on learning environment.`
+        }, {
+            key: 'sports',
+            title: 'What kind of sports and athletic programs are offered?',
+            content: `Our school offers professional coaching in football, cricket, basketball, athletics, and more. With expansive fields and modern sports infrastructure, students are motivated to excel in both team and individual sports.`
+        }, {
+            key: 'global_programs',
+            title: 'How does DCM YES provide global exposure to students?',
+            content: `We offer international exchange programs, global partnerships, and participation in world forums. These experiences help students gain cross-cultural understanding and prepare them for global opportunities in academics and careers.`
+        }];
 
 
         // The primary options shown in the chat, including the new ones and a special key for the website link
@@ -271,26 +258,47 @@ class ChatUI {
             const title = document.createElement('h2');
             title.textContent = faq.title;
             title.classList.add('font-playfair');
-            
+
             const contentContainer = document.createElement('div');
             contentContainer.classList.add('faq-content-container');
             contentContainer.innerHTML = faq.content;
 
+            // Create a wrapper for the read button
+            const buttonWrapper = document.createElement('div');
+            buttonWrapper.classList.add('faq-button-wrapper');
+
+            const readButton = document.createElement('button');
+            readButton.textContent = 'Read';
+            readButton.classList.add('faq-read-btn');
+
+            // Extract clean text for speech synthesis by stripping HTML tags
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = faq.content;
+            const textToRead = tempDiv.textContent || tempDiv.innerText || "";
+
+            // Set the full text (title + content) to be read
+            readButton.setAttribute('data-text', `${faq.title}. ${textToRead}`);
+            readButton.addEventListener('click', () => this.toggleFaqSpeech(readButton));
+
+            buttonWrapper.appendChild(readButton);
+
             section.appendChild(title);
             section.appendChild(contentContainer);
+            section.appendChild(buttonWrapper); // Append the button
             this.faqContainer.appendChild(section);
         });
     }
+
 
     // --- Chat functionality methods ---
     async addMessage(text, sender) {
         const bubble = document.createElement('div');
         bubble.classList.add('chat-bubble', sender === 'user' ? 'user-bubble' : 'bot-bubble');
-        
+
         const content = document.createElement('div');
         content.classList.add('message-text-content');
         content.innerHTML = text;
-        
+
         const timestamp = document.createElement('span');
         timestamp.classList.add('timestamp');
         timestamp.textContent = this.getCurrentTime();
@@ -307,7 +315,11 @@ class ChatUI {
         }
 
         this.messageContainer.appendChild(bubble);
-        this.chatHistory.push({ text, sender, timestamp: timestamp.textContent });
+        this.chatHistory.push({
+            text,
+            sender,
+            timestamp: timestamp.textContent
+        });
         this.saveChat();
         this.scrollToBottom();
     }
@@ -378,7 +390,7 @@ class ChatUI {
 
     toggleFaqSpeech(button) {
         const text = button.getAttribute('data-text');
-        
+
         // If the same FAQ is already playing, stop it.
         if (this.currentUtterance && this.currentFaqButton === button) {
             this.stopSpeech();
@@ -387,7 +399,7 @@ class ChatUI {
 
         // Stop any other current speech (FAQ or chat bubble)
         this.stopSpeech();
-        
+
         // Start speaking the new text
         this.speakText(text, button);
     }
@@ -437,9 +449,6 @@ class ChatUI {
 
     showOptions(options) {
         this.clearOptions();
-        // Flag to check if we are showing a special button
-        let specialButtonAdded = false;
-
         options.forEach((key, index) => {
             if (key === 'website') {
                 // Create a distinct button for the website link
@@ -449,7 +458,6 @@ class ChatUI {
                 websiteButton.onclick = () => window.open('https://dcmyesschool.com', '_blank');
                 websiteButton.style.animationDelay = `${index * 0.05}s`;
                 this.optionsWrapper.appendChild(websiteButton);
-                specialButtonAdded = true;
             } else {
                 const optionData = this.chatService.qaDatabase[key];
                 if (optionData) {
@@ -475,6 +483,7 @@ class ChatUI {
         this.messageContainer.innerHTML = '';
         this.chatHistory = [];
         localStorage.removeItem('chatHistory');
+        localStorage.removeItem('lastVisitDate'); // Also clear the visit date
         this.optionsWrapper.innerHTML = '';
         this.initChat();
     }
@@ -505,15 +514,21 @@ class ChatUI {
             indicator.remove();
         }
     }
-    
+
     scrollOptions(amount) {
         this.optionsWrapper.scrollLeft += amount;
     }
 
     updateArrowVisibility() {
-        const { scrollLeft, scrollWidth, clientWidth } = this.optionsWrapper;
+        const {
+            scrollLeft,
+            scrollWidth,
+            clientWidth
+        } = this.optionsWrapper;
+        // Add a small buffer to handle subpixel rendering issues in some browsers
+        const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 1;
         this.scrollLeftBtn.classList.toggle('disabled', scrollLeft === 0);
-        this.scrollRightBtn.classList.toggle('disabled', scrollLeft + clientWidth >= scrollWidth);
+        this.scrollRightBtn.classList.toggle('disabled', isAtEnd);
     }
 
     // --- Local storage for chat history ---
@@ -525,12 +540,13 @@ class ChatUI {
         const history = localStorage.getItem('chatHistory');
         if (history) {
             this.chatHistory = JSON.parse(history);
+            this.messageContainer.innerHTML = ''; // Clear container before loading
             this.chatHistory.forEach(msg => {
                 const bubble = document.createElement('div');
                 bubble.classList.add('chat-bubble', msg.sender === 'user' ? 'user-bubble' : 'bot-bubble');
                 bubble.style.opacity = '1';
                 bubble.style.transform = 'translateY(0)';
-                
+
                 const content = document.createElement('div');
                 content.classList.add('message-text-content');
                 content.innerHTML = msg.text;
@@ -558,19 +574,23 @@ class ChatUI {
     }
 
     async initChat() {
-        // Check if chat history exists and has messages
+        const today = new Date().toISOString().split('T')[0];
+        const lastVisit = localStorage.getItem('lastVisitDate');
         const history = localStorage.getItem('chatHistory');
         const chatHistoryExists = history && JSON.parse(history).length > 0;
 
         this.clearOptions();
-        
-        if (chatHistoryExists) {
-            // If history exists, just load it and show options
+
+        // Condition 1: If it's the same day and chat history exists, load the chat.
+        if (lastVisit === today && chatHistoryExists) {
             this.loadChat();
-            // Pass the complete list of options including the 'website' key
             this.showOptions(this.chatService.primaryOptions);
         } else {
-            // If no history, show the welcome message for the first time
+            // Condition 2: If it's a new day or no history, start a fresh chat.
+            this.messageContainer.innerHTML = ''; // Clear visual chat
+            localStorage.removeItem('chatHistory'); // Clear stored history
+            localStorage.setItem('lastVisitDate', today); // Set the new visit date
+
             const typingIndicator = this.showTypingIndicator();
             try {
                 const startData = await this.chatService.getStartData();
@@ -597,5 +617,3 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastTab = localStorage.getItem('activeTab') || 'ai-chat';
     chatUI.handleTabClick(lastTab);
 });
-
-
