@@ -72,86 +72,85 @@ class ChatService {
         
         // An array of key-value pairs for displaying the FAQs directly.
         this.faqContent = [
-            {
-                key: 'about_us',
-                title: 'The Legacy: A Story of Excellence',
-                content: `For over 75 years, DCM YES School has been a beacon of learning in Ludhiana, shaping the futures of over 112,500 students since its founding in 1946 by Late Shri M R Dass. Our vision, "From Cradle to Corporate," is more than a motto—it's a commitment to nurturing young minds with a perfect blend of timeless values and cutting-edge educational practices. We prepare our students for a world of rapid change by focusing on innovation, entrepreneurship, and emerging technologies like AI, AR, VR, and ML.`
-            },
-            {
-                key: 'admissions',
-                title: 'Your Journey Starts Here: The Admissions Process',
-                content: `Embark on a new chapter with us! Our admission process for the upcoming academic session typically commences in the crisp month of November. To ensure you have all the necessary information—from eligibility criteria and required documents to important deadlines—we invite you to explore the dedicated <a href="https://dcmyesschool.com/contact" class="text-theme-blue font-semibold" target="_blank">admissions section on our official website</a>. We look forward to welcoming you to the DCM YES family!`
-            },
-            {
-                key: 'curriculum',
-                title: 'A World of Knowledge: Our Innovative Curriculum',
-                content: `At DCM YES, we believe in a curriculum that does more than just educate—it inspires. We follow the esteemed <strong>CBSE curriculum</strong>, but we don't stop there. We've enriched it with our own specialized programs tailored for every age group. These include our unique <strong>Mother's Lap, CCLICK, SLITEE, and CLASSE</strong> initiatives, all designed to foster holistic growth. Our students thrive in an environment rich with diverse co-curricular and extra-curricular activities, ensuring a well-rounded educational experience.`
-            },
-            {
-                key: 'facilities',
-                title: 'Modern Marvels: Facilities That Inspire',
-                content: `Our campus is a hub of innovation and learning, equipped with a wide array of state-of-the-art facilities:
-                <ul class="list-disc list-inside mt-2">
-                    <li><strong>Smart Classrooms:</strong> Digitally networked for interactive learning.</li>
-                    <li><strong>Ultra-Modern Labs:</strong> Specialized labs for Physics, Chemistry, Biology, Social Studies, Maths, AI/Robotics, and languages.</li>
-                    <li><strong>Hi-tech Library:</strong> A treasure trove of knowledge for curious minds.</li>
-                    <li><strong>Expansive Sports Grounds:</strong> Perfect for indoor and outdoor games with expert coaching.</li>
-                    <li><strong>Kids Amusement Park:</strong> A fun and vibrant space with rides and animated characters.</li>
-                    <li><strong>Etiquette Villa:</strong> A dedicated space for personality development and grooming.</li>
-                </ul>`
-            },
-            {
-                key: 'achievements',
-                title: 'Pioneering Pathways: Our Unique Achievements',
-                content: `We pride ourselves on programs that go beyond the ordinary:
-                <ul class="list-disc list-inside mt-2">
-                    <li><strong>Dual Diplomas:</strong> A prestigious partnership with Houghton Academy, New York, USA, allowing students to earn both a CBSE and an American High School diploma.</li>
-                    <li><strong>Earn While You Learn:</strong> An innovative internship program to build real-world skills and leadership qualities.</li>
-                    <li><strong>Entrepreneurial Platform:</strong> A dynamic space to cultivate the next generation of innovators and business leaders.</li>
-                    <li><strong>Global Collaborations:</strong> Our students have made their mark on the international stage at events like the World Entrepreneurship Summit, USA.</li>
-                </ul>`
-            },
-            {
-                key: 'contact',
-                title: 'Connect with Us',
-                content: `We're always here to help. You can reach our team through: <br><br>
-                <strong>Phone:</strong> <a href="tel:+911613510099" class="text-theme-blue font-semibold">+91-161-3510099</a><br>
-                <strong>Mobile:</strong> <a href="tel:+918728893030" class="text-theme-blue font-semibold">+91-8728893030</a><br>
-                <strong>General Email:</strong> <a href="mailto:contact@dcmyesschool.com" class="text-theme-blue font-semibold">contact@dcmyesschool.com</a><br>
-                <strong>Admissions Email:</strong> <a href="mailto:admissions@dcmyesschool.com" class="text-theme-blue font-semibold">admissions@dcmyesschool.com</a><br><br>
-                Our beautiful campus is located at: DCM Young Entrepreneurs School, Block-B, Rajguru Nagar, Ludhiana, Punjab - 141012 (India).`
-            },
-            {
-                key: 'safety_security',
-                title: 'A Safe Haven: Safety and Security',
-                content: `Your child's safety is our utmost priority. Our campus is a fortress of security, featuring a comprehensive, round-the-clock CCTV surveillance system and a vigilant team of security personnel. We are committed to providing a secure and nurturing environment where students can learn, play, and grow without a worry.`
-            },
-            {
-                key: 'health_wellness',
-                title: 'Holistic Well-Being: Health and Wellness',
-                content: `We believe that a healthy body and a healthy mind are the cornerstones of successful learning. Our school has a fully-equipped health clinic staffed by a qualified nurse, ready to handle any medical needs. We also promote a culture of wellness through regular health check-ups and engaging workshops that empower students to make healthy lifestyle choices.`
-            },
-            {
-                key: 'yespreneurship',
-                title: 'The Future is Now: Yespreneurship Programs',
-                content: `Our innovative "Yespreneurship" program is designed to spark the entrepreneurial spirit in every student. This unique platform encourages young minds to develop groundbreaking business ideas, understand the dynamics of the market, and receive invaluable mentorship from experienced industry leaders. We are building the next generation of innovators and job creators.`
-            },
-            {
-                key: 'innovation',
-                title: 'Beyond the Textbook: Innovation at YES',
-                content: `Innovation is not just a buzzword at DCM YES—it's a way of life. Our curriculum is forward-thinking, integrating cutting-edge technologies like <strong>Artificial Intelligence (AI), Augmented Reality (AR), Virtual Reality (VR), and Machine Learning (ML)</strong>. We foster an environment of curiosity, encouraging students to think creatively and solve real-world problems.`
-            },
-            {
-                key: 'sports',
-                title: 'Championing the Spirit: Sports Facilities',
-                content: `We are dedicated to the holistic development of our students, which includes physical fitness and sportsmanship. Our school boasts expansive grounds for a wide range of sports, including football, cricket, basketball, and athletics. Under the guidance of our expert coaches, students are encouraged to pursue their passions and achieve sporting excellence.`
-            },
-            {
-                key: 'global_programs',
-                title: 'World-Ready: Global Programs & Exposure',
-                content: `We prepare our students to be global citizens. Through partnerships with international schools and active participation in global forums and student exchange programs, we provide unique opportunities for cross-cultural learning. This exposure broadens their horizons and equips them with a global perspective essential for success in the modern world.`
-            }
-        ];
+  {
+    key: 'about_us',
+    title: 'How has DCM YES School built its legacy of excellence over the years?',
+    content: `DCM YES School has proudly shaped the future of over 112,500 students since its founding in 1946 by Late Shri M R Dass. With a vision of "From Cradle to Corporate," we combine timeless values with modern educational practices. Our commitment to innovation, entrepreneurship, and future-focused learning—including AI, AR, VR, and ML—prepares students to thrive in a rapidly changing world.`
+  },
+  {
+    key: 'admissions',
+    title: 'What is the step-by-step admission process at DCM YES?',
+    content: `The admission process typically begins in November for the next academic session. You’ll find details on eligibility, required documents, timelines, and more on our <a href="https://dcmyesschool.com/contact" class="text-theme-blue font-semibold" target="_blank">official admissions page</a>. We encourage you to explore and take the first step toward becoming part of the DCM YES family.`
+  },
+  {
+    key: 'curriculum',
+    title: 'What kind of curriculum does DCM YES School follow?',
+    content: `We follow the esteemed CBSE curriculum, enhanced with our own specialized programs designed for holistic development. These include <strong>Mother's Lap, CCLICK, SLITEE, and CLASSE</strong>, which support students across different age groups. The curriculum is rich in both academics and co-curricular opportunities, offering a well-rounded learning experience.`
+  },
+  {
+    key: 'facilities',
+    title: 'What modern facilities are available at DCM YES School?',
+    content: `Our campus features:<ul class="list-disc list-inside mt-2">
+      <li><strong>Smart Classrooms:</strong> Fully digital for interactive learning</li>
+      <li><strong>Ultra-Modern Labs:</strong> For Physics, Chemistry, Biology, Social Studies, Maths, AI/Robotics, and languages</li>
+      <li><strong>Hi-tech Library:</strong> Stocked with vast knowledge resources</li>
+      <li><strong>Sports Grounds:</strong> For indoor and outdoor sports with expert coaching</li>
+      <li><strong>Kids Amusement Park:</strong> Fun zones with themed rides</li>
+      <li><strong>Etiquette Villa:</strong> A unique area for personality and grooming skills</li>
+    </ul>`
+  },
+  {
+    key: 'achievements',
+    title: 'What are some of the unique achievements of DCM YES School?',
+    content: `<ul class="list-disc list-inside mt-2">
+      <li><strong>Dual Diplomas:</strong> In collaboration with Houghton Academy, USA</li>
+      <li><strong>Earn While You Learn:</strong> Internships that build real-world experience</li>
+      <li><strong>Entrepreneurial Platform:</strong> Fostering the next generation of leaders</li>
+      <li><strong>Global Collaborations:</strong> Participation in global events like the World Entrepreneurship Summit</li>
+    </ul>`
+  },
+  {
+    key: 'contact',
+    title: 'How can I contact DCM YES School for queries or admissions?',
+    content: `You can reach us via:<br><br>
+      <strong>Phone:</strong> <a href="tel:+911613510099" class="text-theme-blue font-semibold">+91-161-3510099</a><br>
+      <strong>Mobile:</strong> <a href="tel:+918728893030" class="text-theme-blue font-semibold">+91-8728893030</a><br>
+      <strong>General Email:</strong> <a href="mailto:contact@dcmyesschool.com" class="text-theme-blue font-semibold">contact@dcmyesschool.com</a><br>
+      <strong>Admissions Email:</strong> <a href="mailto:admissions@dcmyesschool.com" class="text-theme-blue font-semibold">admissions@dcmyesschool.com</a><br><br>
+      <strong>Campus Address:</strong> DCM Young Entrepreneurs School, Block-B, Rajguru Nagar, Ludhiana, Punjab - 141012 (India)`
+  },
+  {
+    key: 'safety_security',
+    title: 'How does DCM YES ensure safety and security for students?',
+    content: `Our campus is under 24/7 CCTV surveillance and secured by trained security personnel. We are deeply committed to creating a safe and nurturing environment where students can thrive, both emotionally and physically.`
+  },
+  {
+    key: 'health_wellness',
+    title: 'What health and wellness services are available at the school?',
+    content: `We have a fully equipped health clinic with a qualified nurse available during school hours. Regular health check-ups and wellness workshops are conducted to promote mental and physical well-being among students.`
+  },
+  {
+    key: 'yespreneurship',
+    title: 'What is the Yespreneurship program at DCM YES?',
+    content: `Yespreneurship is our signature program that develops entrepreneurial thinking in students. It helps them ideate, prototype, and pitch business ideas while receiving mentorship from experienced entrepreneurs.`
+  },
+  {
+    key: 'innovation',
+    title: 'How is innovation integrated into the school’s learning approach?',
+    content: `Innovation is woven into our curriculum through the integration of technologies like AI, AR, VR, and ML. Students are encouraged to solve real-world problems and explore creative solutions in a hands-on learning environment.`
+  },
+  {
+    key: 'sports',
+    title: 'What kind of sports and athletic programs are offered?',
+    content: `Our school offers professional coaching in football, cricket, basketball, athletics, and more. With expansive fields and modern sports infrastructure, students are motivated to excel in both team and individual sports.`
+  },
+  {
+    key: 'global_programs',
+    title: 'How does DCM YES provide global exposure to students?',
+    content: `We offer international exchange programs, global partnerships, and participation in world forums. These experiences help students gain cross-cultural understanding and prepare them for global opportunities in academics and careers.`
+  }
+];
+
 
         // The primary options shown in the chat, including the new ones and a special key for the website link
         this.primaryOptions = ['admissions', 'curriculum', 'facilities', 'contact', 'about_us', 'achievements', 'safety_security', 'health_wellness', 'yespreneurship', 'innovation', 'sports', 'global_programs', 'website'];
@@ -277,14 +276,6 @@ class ChatUI {
             contentContainer.classList.add('faq-content-container');
             contentContainer.innerHTML = faq.content;
 
-            // Create the read button
-            const readButton = document.createElement('button');
-            readButton.textContent = 'Read';
-            readButton.classList.add('faq-read-btn');
-            readButton.setAttribute('data-text', title.textContent + '. ' + contentContainer.textContent);
-            readButton.addEventListener('click', () => this.toggleFaqSpeech(readButton));
-
-            section.appendChild(readButton);
             section.appendChild(title);
             section.appendChild(contentContainer);
             this.faqContainer.appendChild(section);
@@ -607,16 +598,4 @@ document.addEventListener('DOMContentLoaded', () => {
     chatUI.handleTabClick(lastTab);
 });
 
-function showWelcomeMessage() {
-  const message = "Welcome to DCM YES School, a legacy in education since 1946. We are committed to fostering an environment of academic excellence and holistic development. How can we assist you today?";
-  // Code to create and add the message bubble to #message-container
-}
 
-// This event listener likely calls the function every time the tab is clicked
-document.getElementById('tab-ai-chat').addEventListener('click', () => {
-  // ... tab switching logic ...
-  showWelcomeMessage(); // This is the likely cause of the repetition
-});
-
-// The welcome message might also be called on page load, causing double-display
-window.addEventListener('load', showWelcomeMessage);
