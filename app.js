@@ -1,8 +1,6 @@
-// --- ChatService: Simulates interaction with a backend API ---
+  // --- ChatService: Simulates interaction with a backend API ---
 class ChatService {
     constructor() {
-        // In a real application, this would be an actual API endpoint.
-        // For demonstration, we simulate data and network delay.
         this.qaDatabase = {
             'start': {
                 question: 'Initial prompt',
@@ -70,7 +68,6 @@ class ChatService {
             }
         };
 
-        // An array of key-value pairs for displaying the FAQs directly.
         this.faqContent = [{
             key: 'about_us',
             title: 'How has DCM YES School built its legacy of excellence over the years?',
@@ -139,12 +136,10 @@ class ChatService {
         }];
 
 
-        // The primary options shown in the chat, including the new ones and a special key for the website link
         this.primaryOptions = ['admissions', 'curriculum', 'facilities', 'contact', 'about_us', 'achievements', 'safety_security', 'health_wellness', 'yespreneurship', 'innovation', 'sports', 'global_programs', 'website'];
     }
 
     async getStartData() {
-        // Simulate network latency
         await new Promise(resolve => setTimeout(resolve, 500));
         return {
             message: this.qaDatabase['start'].answer,
@@ -153,10 +148,8 @@ class ChatService {
     }
 
     async getAnswer(key) {
-        // Simulate network latency
         await new Promise(resolve => setTimeout(resolve, 500));
         const response = this.qaDatabase[key];
-        // Filter out the current key and the special 'website' key from follow-up questions
         const followUpQuestions = this.primaryOptions.filter(opt => opt !== key && opt !== 'website');
         return {
             question: response.question,
@@ -168,7 +161,6 @@ class ChatService {
     async getFollowUpAnswer(key) {
         await new Promise(resolve => setTimeout(resolve, 500));
         const response = this.qaDatabase[key];
-        // Filter out the current key and the special 'website' key from follow-up questions
         const followUpQuestions = this.primaryOptions.filter(opt => opt !== key && opt !== 'website');
         return {
             question: response.question,
@@ -182,12 +174,10 @@ class ChatService {
     }
 
     getAllPrimaryOptionKeys() {
-        // Filter out the special 'website' key when retrieving all options
         return this.primaryOptions.filter(opt => opt !== 'website');
     }
 }
 
-// --- ChatUI: Handles all UI rendering and user interactions ---
 class ChatUI {
     constructor(chatService) {
         this.chatService = chatService;
@@ -203,11 +193,19 @@ class ChatUI {
         this.aiChatContainer = document.getElementById('ai-chat-container');
         this.faqContainer = document.getElementById('faq-container');
         this.greetingText = document.getElementById('greeting-text');
+        this.settingsButton = document.getElementById('settings-button');
+        this.settingsPanel = document.getElementById('settings-panel');
+        this.closeSettingsPanel = document.getElementById('close-settings-panel');
+        this.darkModeToggle = document.getElementById('dark-mode-toggle');
+        this.fontSizeSelector = document.getElementById('font-size-selector');
+        this.ttsToggle = document.getElementById('tts-toggle');
+        this.mainAppWrapper = document.querySelector('.main-app-wrapper');
 
         this.speechSynth = window.speechSynthesis;
         this.currentUtterance = null;
         this.isPaused = false;
         this.currentFaqButton = null;
+        this.ttsEnabled = true;
 
         this.bindEvents();
         this.chatHistory = [];
@@ -222,6 +220,69 @@ class ChatUI {
         this.optionsWrapper.addEventListener('scroll', this.updateArrowVisibility.bind(this));
         this.tabAiChat.addEventListener('click', () => this.handleTabClick('ai-chat'));
         this.tabFaqs.addEventListener('click', () => this.handleTabClick('faqs'));
+        
+        // New event listeners for settings
+        this.settingsButton.addEventListener('click', () => this.settingsPanel.classList.remove('hidden'));
+        this.closeSettingsPanel.addEventListener('click', () => this.settingsPanel.classList.add('hidden'));
+        this.darkModeToggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode', this.darkModeToggle.checked);
+            this.saveSettings();
+        });
+        this.fontSizeSelector.addEventListener('change', () => {
+            const selectedSize = this.fontSizeSelector.value;
+            const root = document.documentElement;
+            switch (selectedSize) {
+                case 'large': root.style.setProperty('--font-size-base', '1.2rem'); break;
+                case 'extra-large': root.style.setProperty('--font-size-base', '1.4rem'); break;
+                default: root.style.setProperty('--font-size-base', '1rem'); break;
+            }
+            this.saveSettings();
+        });
+        this.ttsToggle.addEventListener('change', () => {
+            this.ttsEnabled = this.ttsToggle.checked;
+            this.saveSettings();
+            if (!this.ttsEnabled) {
+                this.stopSpeech();
+            }
+        });
+    }
+
+    // New methods for settings
+    saveSettings() {
+        const settings = {
+            darkMode: this.darkModeToggle.checked,
+            fontSize: this.fontSizeSelector.value,
+            ttsEnabled: this.ttsToggle.checked
+        };
+        localStorage.setItem('userSettings', JSON.stringify(settings));
+    }
+
+    loadSettings() {
+        const savedSettings = localStorage.getItem('userSettings');
+        if (savedSettings) {
+            const settings = JSON.parse(savedSettings);
+
+            // Apply Dark Mode
+            this.darkModeToggle.checked = settings.darkMode;
+            document.body.classList.toggle('dark-mode', settings.darkMode);
+
+            // Apply Font Size
+            this.fontSizeSelector.value = settings.fontSize;
+            const root = document.documentElement;
+            switch (settings.fontSize) {
+                case 'large': root.style.setProperty('--font-size-base', '1.2rem'); break;
+                case 'extra-large': root.style.setProperty('--font-size-base', '1.4rem'); break;
+                default: root.style.setProperty('--font-size-base', '1rem'); break;
+            }
+
+            // Apply TTS Toggle, defaulting to true if not specified
+            this.ttsToggle.checked = settings.ttsEnabled !== undefined ? settings.ttsEnabled : true;
+            this.ttsEnabled = this.ttsToggle.checked;
+        } else {
+            // If no settings exist, set TTS to ON by default. Other settings default to what's in the HTML.
+            this.ttsToggle.checked = true;
+            this.ttsEnabled = true;
+        }
     }
 
     handleTabClick(tab) {
@@ -263,34 +324,25 @@ class ChatUI {
             contentContainer.classList.add('faq-content-container');
             contentContainer.innerHTML = faq.content;
 
-            // Create a wrapper for the read button
-            const buttonWrapper = document.createElement('div');
-            buttonWrapper.classList.add('faq-button-wrapper');
-
             const readButton = document.createElement('button');
             readButton.textContent = 'Read';
             readButton.classList.add('faq-read-btn');
 
-            // Extract clean text for speech synthesis by stripping HTML tags
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = faq.content;
             const textToRead = tempDiv.textContent || tempDiv.innerText || "";
 
-            // Set the full text (title + content) to be read
             readButton.setAttribute('data-text', `${faq.title}. ${textToRead}`);
             readButton.addEventListener('click', () => this.toggleFaqSpeech(readButton));
 
-            buttonWrapper.appendChild(readButton);
-
             section.appendChild(title);
             section.appendChild(contentContainer);
-            section.appendChild(buttonWrapper); // Append the button
+            section.appendChild(readButton);
             this.faqContainer.appendChild(section);
         });
     }
 
 
-    // --- Chat functionality methods ---
     async addMessage(text, sender) {
         const bubble = document.createElement('div');
         bubble.classList.add('chat-bubble', sender === 'user' ? 'user-bubble' : 'bot-bubble');
@@ -307,10 +359,13 @@ class ChatUI {
         bubble.appendChild(timestamp);
 
         if (sender === 'bot') {
-            // Create and add speaker icon for TTS
             const speakerIcon = document.createElement('i');
             speakerIcon.classList.add('fas', 'fa-volume-up', 'speaker-icon');
-            speakerIcon.addEventListener('click', () => this.speakText(content.textContent));
+            speakerIcon.addEventListener('click', () => {
+                if (this.ttsEnabled) {
+                    this.speakText(content.textContent);
+                }
+            });
             bubble.appendChild(speakerIcon);
         }
 
@@ -324,8 +379,8 @@ class ChatUI {
         this.scrollToBottom();
     }
 
-    // Centralized speech control function
     speakText(text, button = null) {
+        if (!this.ttsEnabled) return;
         this.stopSpeech();
         this.currentUtterance = new SpeechSynthesisUtterance(text);
         this.currentUtterance.pitch = 1.0;
@@ -389,18 +444,15 @@ class ChatUI {
     }
 
     toggleFaqSpeech(button) {
+        if (!this.ttsEnabled) return;
         const text = button.getAttribute('data-text');
-
-        // If the same FAQ is already playing, stop it.
+        
         if (this.currentUtterance && this.currentFaqButton === button) {
             this.stopSpeech();
             return;
         }
-
-        // Stop any other current speech (FAQ or chat bubble)
+        
         this.stopSpeech();
-
-        // Start speaking the new text
         this.speakText(text, button);
     }
 
@@ -451,7 +503,6 @@ class ChatUI {
         this.clearOptions();
         options.forEach((key, index) => {
             if (key === 'website') {
-                // Create a distinct button for the website link
                 const websiteButton = document.createElement('button');
                 websiteButton.classList.add('option-button', 'website-button');
                 websiteButton.innerHTML = 'Go to Website <i class="fas fa-external-link-alt ml-2"></i>';
@@ -479,16 +530,15 @@ class ChatUI {
     }
 
     clearChat() {
-        this.stopSpeech(); // Stop any speech when clearing chat
+        this.stopSpeech();
         this.messageContainer.innerHTML = '';
         this.chatHistory = [];
         localStorage.removeItem('chatHistory');
-        localStorage.removeItem('lastVisitDate'); // Also clear the visit date
+        localStorage.removeItem('lastVisitDate');
         this.optionsWrapper.innerHTML = '';
         this.initChat();
     }
 
-    // --- UI utility methods ---
     scrollToBottom() {
         this.chatWindow.scrollTop = this.chatWindow.scrollHeight;
     }
@@ -520,18 +570,12 @@ class ChatUI {
     }
 
     updateArrowVisibility() {
-        const {
-            scrollLeft,
-            scrollWidth,
-            clientWidth
-        } = this.optionsWrapper;
-        // Add a small buffer to handle subpixel rendering issues in some browsers
+        const { scrollLeft, scrollWidth, clientWidth } = this.optionsWrapper;
         const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 1;
         this.scrollLeftBtn.classList.toggle('disabled', scrollLeft === 0);
         this.scrollRightBtn.classList.toggle('disabled', isAtEnd);
     }
 
-    // --- Local storage for chat history ---
     saveChat() {
         localStorage.setItem('chatHistory', JSON.stringify(this.chatHistory));
     }
@@ -540,7 +584,7 @@ class ChatUI {
         const history = localStorage.getItem('chatHistory');
         if (history) {
             this.chatHistory = JSON.parse(history);
-            this.messageContainer.innerHTML = ''; // Clear container before loading
+            this.messageContainer.innerHTML = '';
             this.chatHistory.forEach(msg => {
                 const bubble = document.createElement('div');
                 bubble.classList.add('chat-bubble', msg.sender === 'user' ? 'user-bubble' : 'bot-bubble');
@@ -561,7 +605,11 @@ class ChatUI {
                 if (msg.sender === 'bot') {
                     const speakerIcon = document.createElement('i');
                     speakerIcon.classList.add('fas', 'fa-volume-up', 'speaker-icon');
-                    speakerIcon.addEventListener('click', () => this.speakText(content.textContent));
+                    speakerIcon.addEventListener('click', () => {
+                        if (this.ttsEnabled) {
+                            this.speakText(content.textContent);
+                        }
+                    });
                     bubble.appendChild(speakerIcon);
                 }
 
@@ -581,15 +629,13 @@ class ChatUI {
 
         this.clearOptions();
 
-        // Condition 1: If it's the same day and chat history exists, load the chat.
         if (lastVisit === today && chatHistoryExists) {
             this.loadChat();
             this.showOptions(this.chatService.primaryOptions);
         } else {
-            // Condition 2: If it's a new day or no history, start a fresh chat.
-            this.messageContainer.innerHTML = ''; // Clear visual chat
-            localStorage.removeItem('chatHistory'); // Clear stored history
-            localStorage.setItem('lastVisitDate', today); // Set the new visit date
+            this.messageContainer.innerHTML = '';
+            localStorage.removeItem('chatHistory');
+            localStorage.setItem('lastVisitDate', today);
 
             const typingIndicator = this.showTypingIndicator();
             try {
@@ -609,11 +655,10 @@ class ChatUI {
     }
 }
 
-// --- Application Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
     const chatService = new ChatService();
     const chatUI = new ChatUI(chatService);
-    // Determine which tab was last active from local storage, or default to 'ai-chat'
+    chatUI.loadSettings();
     const lastTab = localStorage.getItem('activeTab') || 'ai-chat';
     chatUI.handleTabClick(lastTab);
 });

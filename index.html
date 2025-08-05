@@ -12,8 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-
-  <link rel="stylesheet" href="styles.css" />
+   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="bg-white flex items-center justify-center min-h-screen m-0 p-0">
 
@@ -35,6 +34,9 @@
       <div class="header-tabs flex items-center ml-auto" role="tablist">
         <button id="tab-ai-chat" class="tab-button-header active" role="tab" aria-controls="ai-chat-container">AI Chat</button>
         <button id="tab-faqs" class="tab-button-header" role="tab" aria-controls="faq-container">FAQs</button>
+        <button id="settings-button" class="bg-gradient-blue text-white p-2 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-blue-600 transition-all duration-200 ml-4" aria-label="Settings">
+          <i class="fas fa-cog text-lg"></i>
+        </button>
         <button id="clear-chat-button" class="ml-4" aria-label="Clear chat">Clear Chat</button>
         <button id="stop-reading-button" aria-label="Stop text-to-speech">Stop Reading</button>
       </div>
@@ -175,6 +177,40 @@
         </div>
       </div>
     </section>
+    
+    <div id="settings-panel" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg p-6 w-full max-w-sm shadow-xl relative">
+            <h3 class="text-xl font-bold mb-4">⚙️ Settings</h3>
+            <button id="close-settings-panel" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:hover:text-gray-300"><i class="fas fa-times"></i></button>
+
+            <hr class="my-4">
+
+            <div class="flex items-center justify-between mb-4">
+                <span class="font-medium">🌓 Dark Mode Toggle</span>
+                <input type="checkbox" id="dark-mode-toggle" class="toggle toggle-primary" />
+            </div>
+            
+            <hr class="my-4">
+
+            <div class="mb-4">
+                <label for="font-size-selector" class="font-medium block mb-2">🔠 Font Size Selector</label>
+                <select id="font-size-selector" class="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:text-white text-gray-900">
+                    <option value="normal">Normal 👓 (default)</option>
+                    <option value="large">Large 📖</option>
+                    <option value="extra-large">Extra Large 🧠</option>
+                </select>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="flex items-center justify-between mb-4">
+                <span class="font-medium">🔊 Text-to-Speech (TTS)</span>
+                <input type="checkbox" id="tts-toggle" class="toggle toggle-primary" />
+            </div>
+
+            <p class="text-sm text-gray-500 mt-4">💾 All settings are saved automatically.</p>
+        </div>
+    </div>
 
     <footer class="text-center py-4 text-xs text-gray-500">
       <p>Created by Riddhish, a 10-year-old student from Grade 6.</p>
